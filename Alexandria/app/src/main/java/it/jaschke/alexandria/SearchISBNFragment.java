@@ -25,7 +25,7 @@ import it.jaschke.alexandria.services.BookService;
 import it.jaschke.alexandria.services.DownloadImage;
 
 
-public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class SearchISBNFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = "INTENT_TO_SCAN_ACTIVITY";
     private EditText ean;
     private final int LOADER_ID = 1;
@@ -39,7 +39,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
 
 
 
-    public AddBook(){
+    public SearchISBNFragment(){
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_add_book, container, false);
-        ean = (EditText) rootView.findViewById(R.id.ean);
+        ean = (EditText) rootView.findViewById(R.id.ean_edit_text);
 
         ean.addTextChangedListener(new TextWatcher() {
             @Override
@@ -83,11 +83,11 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
                 bookIntent.putExtra(BookService.EAN, ean);
                 bookIntent.setAction(BookService.FETCH_BOOK);
                 getActivity().startService(bookIntent);
-                AddBook.this.restartLoader();
+                SearchISBNFragment.this.restartLoader();
             }
         });
 
-        rootView.findViewById(R.id.scan_button).setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // This is the callback method that the system will invoke when your button is
@@ -106,14 +106,14 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
             }
         });
 
-        rootView.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.add_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ean.setText("");
             }
         });
 
-        rootView.findViewById(R.id.delete_button).setOnClickListener(new View.OnClickListener() {
+        rootView.findViewById(R.id.clear_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent bookIntent = new Intent(getActivity(), BookService.class);
@@ -180,8 +180,8 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
         ((TextView) rootView.findViewById(R.id.categories)).setText(categories);
 
-        rootView.findViewById(R.id.save_button).setVisibility(View.VISIBLE);
-        rootView.findViewById(R.id.delete_button).setVisibility(View.VISIBLE);
+        rootView.findViewById(R.id.add_button).setVisibility(View.VISIBLE);
+        rootView.findViewById(R.id.clear_button).setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -195,13 +195,13 @@ public class AddBook extends Fragment implements LoaderManager.LoaderCallbacks<C
         ((TextView) rootView.findViewById(R.id.authors)).setText("");
         ((TextView) rootView.findViewById(R.id.categories)).setText("");
         rootView.findViewById(R.id.bookCover).setVisibility(View.INVISIBLE);
-        rootView.findViewById(R.id.save_button).setVisibility(View.INVISIBLE);
-        rootView.findViewById(R.id.delete_button).setVisibility(View.INVISIBLE);
+        rootView.findViewById(R.id.add_button).setVisibility(View.INVISIBLE);
+        rootView.findViewById(R.id.clear_button).setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        activity.setTitle(R.string.scan);
+        activity.setTitle(R.string.search_isbn);
     }
 }

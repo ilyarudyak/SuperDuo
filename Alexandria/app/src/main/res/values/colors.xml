@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- using the "Light Green" Material Palette -->
+    <color name="primary">#8bc34a</color>       <!-- 500 -->
+    <color name="primary_dark">#689f38</color>  <!-- 700 -->
+    <color name="primary_light">#c5e1a5</color> <!-- 200 -->
+    <color name="accent">#76ff03</color>        <!-- A400 -->
+
+    <!-- text colors -->
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="white">#FFFFFF</color>
+
+</resources>

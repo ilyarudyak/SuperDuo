@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -107,7 +106,7 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.id.text1,
                 new String[]{
                         getString(R.string.books),
-                        getString(R.string.scan),
+                        getString(R.string.search_isbn),
                         getString(R.string.about),
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);

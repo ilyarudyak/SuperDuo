@@ -1,6 +1,6 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="it.jaschke.alexandria.AddBook">
+    android:layout_height="match_parent" tools:context="it.jaschke.alexandria.SearchISBNFragment">
 
     <RelativeLayout
         android:orientation="horizontal"
@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:minEms="@integer/ean_width"
-            android:id="@+id/ean"
+            android:id="@+id/ean_edit_text"
             android:saveEnabled="true"
             android:textIsSelectable="false"
             android:maxLength="@integer/ean_size"
@@ -29,13 +29,13 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/scan_button"
-            android:id="@+id/scan_button"
+            android:text="@string/search_button"
+            android:id="@+id/search_button"
             android:layout_marginLeft="23dp"
             android:layout_marginStart="23dp"
-            android:layout_alignBottom="@+id/ean"
-            android:layout_toRightOf="@+id/ean"
-            android:layout_toEndOf="@+id/ean"/>
+            android:layout_alignBottom="@+id/ean_edit_text"
+            android:layout_toRightOf="@+id/ean_edit_text"
+            android:layout_toEndOf="@+id/ean_edit_text"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,9 +44,9 @@
             android:textSize="@dimen/head_line"
             android:textIsSelectable="true"
             android:textStyle="bold"
-            android:layout_below="@+id/scan_button"
-            android:layout_alignLeft="@+id/ean"
-            android:layout_alignStart="@+id/ean"
+            android:layout_below="@+id/search_button"
+            android:layout_alignLeft="@+id/ean_edit_text"
+            android:layout_alignStart="@+id/ean_edit_text"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"/>
@@ -103,21 +103,21 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:contentDescription="@string/cancel_button"
+                android:contentDescription="@string/clear_button"
                 android:layout_weight="1"
                 android:src="@drawable/ic_action_discard"
                 style="?android:attr/buttonBarButtonStyle"
-                android:id="@+id/delete_button"
+                android:id="@+id/clear_button"
                 android:visibility="invisible"
                 />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:contentDescription="@string/ok_button"
-                android:text="@string/ok_button"
+                android:contentDescription="@string/add_button"
+                android:text="@string/add_button"
                 android:layout_weight="1"
-                android:id="@+id/save_button"
+                android:id="@+id/add_button"
                 android:visibility="invisible"
                 android:src="@drawable/ic_action_accept"
                 style="?android:attr/buttonBarButtonStyle"

@@ -20,7 +20,8 @@ import android.widget.Toast;
 import it.jaschke.alexandria.api.Callback;
 
 
-public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, Callback {
+public class MainActivity extends ActionBarActivity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, Callback {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -69,13 +70,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         switch (position){
             default:
             case 0:
-                nextFragment = new ListOfBooks();
+                nextFragment = new LibraryFragment();
                 break;
             case 1:
-                nextFragment = new AddBook();
+                nextFragment = new SearchISBNFragment();
                 break;
             case 2:
-                nextFragment = new About();
+                nextFragment = new AboutFragment();
                 break;
 
         }
@@ -135,9 +136,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     @Override
     public void onItemSelected(String ean) {
         Bundle args = new Bundle();
-        args.putString(BookDetail.EAN_KEY, ean);
+        args.putString(BookDetailFragment.EAN_KEY, ean);
 
-        BookDetail fragment = new BookDetail();
+        BookDetailFragment fragment = new BookDetailFragment();
         fragment.setArguments(args);
 
         int id = R.id.container;
