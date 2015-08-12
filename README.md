@@ -8,6 +8,7 @@ Project 3 from Udacity nanodegree
 
 >Only mix button types when you have a good reason to, such as emphasizing an important function. If your app requires actions to be persistent and readily available to the user, consider using persistent footer buttons, which are also easily accessible. Never use raised buttons within persistent button areas.
 
-2.  
+2. From documentation: "add padding around flat buttons so the user can easily find them". We use a separate linear layout that contains these buttons.
+3. We use `Minimum width: 88dp` and `Height: 36dp`.
 
 
