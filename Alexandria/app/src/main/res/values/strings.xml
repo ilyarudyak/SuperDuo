@@ -3,13 +3,12 @@
     <string name="app_name">Alexandria</string>
 
     <!-- Menu Items -->
-    <string name="books">List of Books</string>
-    <string name="search_isbn">Search ISBN</string>
-    <string name="scan_isbn">Scan ISBN</string>
-    <string name="about">About this App</string>
+    <string name="books">Library</string>
+    <string name="search_book">Search Book</string>
+    <string name="about">About</string>
 
     <!-- AddBook fragment-->
-    <string name="input_hint">Enter ISBN -10 or -13</string>
+    <string name="input_hint">Enter ISBN-10 or -13</string>
     <string name="search_button">Search</string>
 
     <string name="add_button">Add</string>

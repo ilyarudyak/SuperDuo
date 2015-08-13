@@ -1,13 +1,14 @@
 package it.jaschke.alexandria;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.LoaderManager;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
@@ -19,44 +20,34 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.BookService;
 import it.jaschke.alexandria.services.DownloadImage;
 
 
-public class SearchISBNFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String TAG = "INTENT_TO_SCAN_ACTIVITY";
-    private EditText ean;
-    private final int LOADER_ID = 1;
+public class SearchBookFragment extends Fragment
+        implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private static final String TAG = SearchBookFragment.class.getSimpleName();
+
+    private static final int LOADER_ID = 1;
+
+    private static final String EAN_CONTENT = "ean_content";
+
     private View rootView;
-    private final String EAN_CONTENT="eanContent";
-    private static final String SCAN_FORMAT = "scanFormat";
-    private static final String SCAN_CONTENTS = "scanContents";
+    private EditText mEanEditText;
 
-    private String mScanFormat = "Format:";
-    private String mScanContents = "Contents:";
-
-
-
-    public SearchISBNFragment(){
+    public SearchBookFragment(){
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if(ean!=null) {
-            outState.putString(EAN_CONTENT, ean.getText().toString());
-        }
-    }
-
-    @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_add_book, container, false);
-        ean = (EditText) rootView.findViewById(R.id.ean_edit_text);
+        mEanEditText = (EditText) rootView.findViewById(R.id.ean_edit_text);
 
-        ean.addTextChangedListener(new TextWatcher() {
+        mEanEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 //no need
@@ -69,13 +60,13 @@ public class SearchISBNFragment extends Fragment implements LoaderManager.Loader
 
             @Override
             public void afterTextChanged(Editable s) {
-                String ean =s.toString();
+                String ean = s.toString();
                 //catch isbn10 numbers
-                if(ean.length()==10 && !ean.startsWith("978")){
-                    ean="978"+ean;
+                if (ean.length() == 10 && !ean.startsWith("978")) {
+                    ean = "978" + ean;
                 }
-                if(ean.length()<13){
-                    clearFields();
+                if (ean.length() < 13) {
+                    clearBookDetails();
                     return;
                 }
                 //Once we have an ISBN, start a book intent
@@ -83,7 +74,7 @@ public class SearchISBNFragment extends Fragment implements LoaderManager.Loader
                 bookIntent.putExtra(BookService.EAN, ean);
                 bookIntent.setAction(BookService.FETCH_BOOK);
                 getActivity().startService(bookIntent);
-                SearchISBNFragment.this.restartLoader();
+                SearchBookFragment.this.restartLoader();
             }
         });
 
@@ -109,7 +100,7 @@ public class SearchISBNFragment extends Fragment implements LoaderManager.Loader
         rootView.findViewById(R.id.add_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ean.setText("");
+                mEanEditText.setText("");
             }
         });
 
@@ -117,31 +108,47 @@ public class SearchISBNFragment extends Fragment implements LoaderManager.Loader
             @Override
             public void onClick(View view) {
                 Intent bookIntent = new Intent(getActivity(), BookService.class);
-                bookIntent.putExtra(BookService.EAN, ean.getText().toString());
+                bookIntent.putExtra(BookService.EAN, mEanEditText.getText().toString());
                 bookIntent.setAction(BookService.DELETE_BOOK);
                 getActivity().startService(bookIntent);
-                ean.setText("");
+                mEanEditText.setText("");
             }
         });
 
         if(savedInstanceState!=null){
-            ean.setText(savedInstanceState.getString(EAN_CONTENT));
-            ean.setHint("");
+            mEanEditText.setText(savedInstanceState.getString(EAN_CONTENT));
+            mEanEditText.setHint("");
         }
 
         return rootView;
     }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        activity.setTitle(R.string.search_book);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(mEanEditText !=null) {
+            outState.putString(EAN_CONTENT, mEanEditText.getText().toString());
+        }
+    }
+
+    // ----------------- loader methods -----------------
 
     private void restartLoader(){
         getLoaderManager().restartLoader(LOADER_ID, null, this);
     }
 
     @Override
-    public android.support.v4.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        if(ean.getText().length()==0){
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        if(mEanEditText.getText().length()==0){
             return null;
         }
-        String eanStr= ean.getText().toString();
+        String eanStr= mEanEditText.getText().toString();
         if(eanStr.length()==10 && !eanStr.startsWith("978")){
             eanStr="978"+eanStr;
         }
@@ -156,7 +163,7 @@ public class SearchISBNFragment extends Fragment implements LoaderManager.Loader
     }
 
     @Override
-    public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (!data.moveToFirst()) {
             return;
         }
@@ -185,11 +192,12 @@ public class SearchISBNFragment extends Fragment implements LoaderManager.Loader
     }
 
     @Override
-    public void onLoaderReset(android.support.v4.content.Loader<Cursor> loader) {
+    public void onLoaderReset(Loader<Cursor> loader) {
 
     }
 
-    private void clearFields(){
+    // helper methods
+    private void clearBookDetails(){
         ((TextView) rootView.findViewById(R.id.bookTitle)).setText("");
         ((TextView) rootView.findViewById(R.id.bookSubTitle)).setText("");
         ((TextView) rootView.findViewById(R.id.authors)).setText("");
@@ -199,9 +207,5 @@ public class SearchISBNFragment extends Fragment implements LoaderManager.Loader
         rootView.findViewById(R.id.clear_button).setVisibility(View.INVISIBLE);
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        activity.setTitle(R.string.search_isbn);
-    }
+
 }

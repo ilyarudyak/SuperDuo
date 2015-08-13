@@ -2,7 +2,7 @@
 <resources>
     <string-array name="pref_start_options">
         <item>@string/books</item>
-        <item>@string/search_isbn</item>
+        <item>@string/search_book</item>
     </string-array>
 
     <string-array name="pref_start_values">

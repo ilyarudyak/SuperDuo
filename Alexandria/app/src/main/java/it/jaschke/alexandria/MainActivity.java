@@ -73,7 +73,7 @@ public class MainActivity extends ActionBarActivity
                 nextFragment = new LibraryFragment();
                 break;
             case 1:
-                nextFragment = new SearchISBNFragment();
+                nextFragment = new SearchBookFragment();
                 break;
             case 2:
                 nextFragment = new AboutFragment();
