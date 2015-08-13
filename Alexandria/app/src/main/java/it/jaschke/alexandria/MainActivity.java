@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import it.jaschke.alexandria.api.Callback;
+import it.jaschke.alexandria.settings.SettingsActivity;
 
 
 public class MainActivity extends ActionBarActivity
@@ -59,6 +61,9 @@ public class MainActivity extends ActionBarActivity
         // Set up the drawer.
         navigationDrawerFragment.setUp(R.id.navigation_drawer,
                     (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        // set up default values
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
     }
 
     @Override

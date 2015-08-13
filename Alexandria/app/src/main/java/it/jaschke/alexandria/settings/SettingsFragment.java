@@ -5,6 +5,7 @@ import android.preference.PreferenceFragment;
 
 import it.jaschke.alexandria.R;
 
+
 /**
  * A placeholder fragment containing a simple view.
  */
