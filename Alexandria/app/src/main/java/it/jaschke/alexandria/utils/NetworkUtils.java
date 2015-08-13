@@ -40,7 +40,7 @@ public class NetworkUtils {
                 activeNetwork.isConnectedOrConnecting();
     }
 
-    public static Book getBookFromNetwork(String ean) {
+    public static Book getBookFromNetwork(String ean_13) {
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -50,7 +50,7 @@ public class NetworkUtils {
             final String FORECAST_BASE_URL = "https://www.googleapis.com/books/v1/volumes?";
             final String QUERY_PARAM = "q";
 
-            final String ISBN_PARAM = "isbn:" + ean;
+            final String ISBN_PARAM = "isbn:" + ean_13;
 
             Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
                     .appendQueryParameter(QUERY_PARAM, ISBN_PARAM)
@@ -95,7 +95,9 @@ public class NetworkUtils {
 
         }
         try {
-            return JsonParser.getBookFromJson(bookJsonString);
+            Book b = JsonParser.getBookFromJson(bookJsonString);
+            b.setIsbn_13(ean_13);
+            return b;
         } catch (JSONException e) {
             Log.e(TAG, "Error parsing json", e);
             return null;

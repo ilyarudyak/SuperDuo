@@ -12,6 +12,7 @@ public class Book {
     private String subtitle;
     private String imgUrl;
     private String description;
+    private String isbn_13;
 
     private List<String> authors;
     private List<String> categories;
@@ -22,7 +23,7 @@ public class Book {
     }
 
     public Book(String title, String subtitle,
-                String imgurl, String description,
+                String imgurl, String description, String isbn_13,
                 List<String> authors, List<String> categories) {
         this.authors = authors;
         this.categories = categories;
@@ -30,6 +31,7 @@ public class Book {
         this.imgUrl = imgurl;
         this.subtitle = subtitle;
         this.title = title;
+        this.isbn_13 = isbn_13;
 
         authors = new ArrayList<>();
         categories = new ArrayList<>();
@@ -53,6 +55,9 @@ public class Book {
     public String getTitle() {
         return title;
     }
+    public String getIsbn_13() {
+        return isbn_13;
+    }
 
     public void setAuthors(List<String> authors) {
         this.authors = authors;
@@ -71,6 +76,9 @@ public class Book {
     }
     public void setTitle(String title) {
         this.title = title;
+    }
+    public void setIsbn_13(String isbn_13) {
+        this.isbn_13 = isbn_13;
     }
 
     @Override

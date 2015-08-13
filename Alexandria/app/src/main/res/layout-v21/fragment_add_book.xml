@@ -49,23 +49,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bookTitle"
+            android:id="@+id/book_title"
             android:textSize="@dimen/head_line"
             android:textIsSelectable="true"
             android:textStyle="bold"
             android:layout_marginTop="25dp"
             android:paddingRight="20dp"
             />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bookCover"
-            android:contentDescription="@string/book_cover"
-            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bookSubTitle"
+            android:id="@+id/book_subtitle"
             android:layout_marginTop="10dp"
             android:maxLines="3"
             android:ellipsize="end"
@@ -73,7 +67,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/authors"
+            android:id="@+id/book_authors"
             android:gravity="end"
             android:textSize="@dimen/small_fontsize"
             android:layout_marginTop="20dp"
@@ -81,9 +75,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/categories"
+            android:id="@+id/book_categories"
             android:textSize="@dimen/small_fontsize"
             android:layout_marginTop="20dp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/book_cover"
+            android:contentDescription="@string/book_cover"
             />
     </LinearLayout>
 

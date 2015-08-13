@@ -78,7 +78,7 @@ public class MainActivity extends ActionBarActivity
                 nextFragment = new LibraryFragment();
                 break;
             case 1:
-                nextFragment = new SearchBookFragment();
+                nextFragment = new BookSearchFragment();
                 break;
             case 2:
                 nextFragment = new AboutFragment();
