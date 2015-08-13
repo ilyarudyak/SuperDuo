@@ -1,12 +1,12 @@
 package it.jaschke.alexandria;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +19,8 @@ import it.jaschke.alexandria.api.Callback;
 import it.jaschke.alexandria.data.AlexandriaContract;
 
 
-public class LibraryFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class LibraryFragment extends Fragment
+        implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private BookListAdapter bookListAdapter;
     private ListView bookList;

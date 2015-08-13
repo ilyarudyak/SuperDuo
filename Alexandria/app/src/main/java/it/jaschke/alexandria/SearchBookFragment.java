@@ -15,6 +15,7 @@ import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,88 +24,54 @@ import android.widget.Toast;
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.BookService;
 import it.jaschke.alexandria.services.DownloadImage;
+import it.jaschke.alexandria.utils.NetworkUtils;
 
 
 public class SearchBookFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String TAG = SearchBookFragment.class.getSimpleName();
-
     private static final int LOADER_ID = 1;
-
     private static final String EAN_CONTENT = "ean_content";
+    public static final String TOAST_NOT_CONNECTED = "You are not connected. " +
+            "Search is not available.";
 
-    private View rootView;
+    private View mRootView;
     private EditText mEanEditText;
+    private boolean isConnected;
+    private boolean isLiveSearch;
 
     public SearchBookFragment(){
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // check if network is available and notify user
+        isConnected = NetworkUtils.isNetworkAvailable(getActivity());
+        if (!isConnected) {
+            Toast.makeText(getActivity(), TOAST_NOT_CONNECTED, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_add_book, container, false);
-        mEanEditText = (EditText) rootView.findViewById(R.id.ean_edit_text);
+        mRootView = inflater.inflate(R.layout.fragment_add_book, container, false);
 
-        mEanEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //no need
-            }
+        setEanEditText();
+        setSearchButton();
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //no need
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String ean = s.toString();
-                //catch isbn10 numbers
-                if (ean.length() == 10 && !ean.startsWith("978")) {
-                    ean = "978" + ean;
-                }
-                if (ean.length() < 13) {
-                    clearBookDetails();
-                    return;
-                }
-                //Once we have an ISBN, start a book intent
-                Intent bookIntent = new Intent(getActivity(), BookService.class);
-                bookIntent.putExtra(BookService.EAN, ean);
-                bookIntent.setAction(BookService.FETCH_BOOK);
-                getActivity().startService(bookIntent);
-                SearchBookFragment.this.restartLoader();
-            }
-        });
-
-        rootView.findViewById(R.id.search_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // This is the callback method that the system will invoke when your button is
-                // clicked. You might do this by launching another app or by including the
-                //functionality directly in this app.
-                // Hint: Use a Try/Catch block to handle the Intent dispatch gracefully, if you
-                // are using an external app.
-                //when you're done, remove the toast below.
-                Context context = getActivity();
-                CharSequence text = "This button should let you scan a book for its barcode!";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
-            }
-        });
-
-        rootView.findViewById(R.id.add_button).setOnClickListener(new View.OnClickListener() {
+        mRootView.findViewById(R.id.add_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mEanEditText.setText("");
             }
         });
 
-        rootView.findViewById(R.id.clear_button).setOnClickListener(new View.OnClickListener() {
+        mRootView.findViewById(R.id.clear_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent bookIntent = new Intent(getActivity(), BookService.class);
@@ -115,12 +82,12 @@ public class SearchBookFragment extends Fragment
             }
         });
 
-        if(savedInstanceState!=null){
+        if(savedInstanceState != null){
             mEanEditText.setText(savedInstanceState.getString(EAN_CONTENT));
             mEanEditText.setHint("");
         }
 
-        return rootView;
+        return mRootView;
     }
 
     @Override
@@ -136,6 +103,80 @@ public class SearchBookFragment extends Fragment
             outState.putString(EAN_CONTENT, mEanEditText.getText().toString());
         }
     }
+
+    // helper methods
+    private void setEanEditText() {
+
+        mEanEditText = (EditText) mRootView.findViewById(R.id.ean_edit_text);
+
+        // disable when no connection is available
+        if (!isConnected) {
+            mEanEditText.setEnabled(false);
+        }
+
+        // add listener only if user choose live search option
+        if (isLiveSearch) {
+            mEanEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    //no need
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    //no need
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    String ean = s.toString();
+                    //catch isbn10 numbers
+                    if (ean.length() == 10 && !ean.startsWith("978")) {
+                        ean = "978" + ean;
+                    }
+                    if (ean.length() < 13) {
+                        clearBookDetails();
+                        return;
+                    }
+                    //Once we have an ISBN, start a book intent
+                    Intent bookIntent = new Intent(getActivity(), BookService.class);
+                    bookIntent.putExtra(BookService.EAN, ean);
+                    bookIntent.setAction(BookService.FETCH_BOOK);
+                    getActivity().startService(bookIntent);
+                    SearchBookFragment.this.restartLoader();
+                }
+            });
+        }
+    }
+    private void setSearchButton() {
+
+        Button searchButton = (Button) mRootView.findViewById(R.id.search_button);
+
+        // disable when no connection is available
+        if (!isConnected) {
+            searchButton.setEnabled(false);
+        }
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Context context = getActivity();
+                CharSequence text = "we're going to search on click";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+            }
+        });
+
+        // make invisible if user choose live search
+        if (isLiveSearch) {
+            searchButton.setVisibility(View.INVISIBLE);
+        }
+    }
+
 
     // ----------------- loader methods -----------------
 
@@ -169,26 +210,26 @@ public class SearchBookFragment extends Fragment
         }
 
         String bookTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
-        ((TextView) rootView.findViewById(R.id.bookTitle)).setText(bookTitle);
+        ((TextView) mRootView.findViewById(R.id.bookTitle)).setText(bookTitle);
 
         String bookSubTitle = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
-        ((TextView) rootView.findViewById(R.id.bookSubTitle)).setText(bookSubTitle);
+        ((TextView) mRootView.findViewById(R.id.bookSubTitle)).setText(bookSubTitle);
 
         String authors = data.getString(data.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
         String[] authorsArr = authors.split(",");
-        ((TextView) rootView.findViewById(R.id.authors)).setLines(authorsArr.length);
-        ((TextView) rootView.findViewById(R.id.authors)).setText(authors.replace(",","\n"));
+        ((TextView) mRootView.findViewById(R.id.authors)).setLines(authorsArr.length);
+        ((TextView) mRootView.findViewById(R.id.authors)).setText(authors.replace(",","\n"));
         String imgUrl = data.getString(data.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
         if(Patterns.WEB_URL.matcher(imgUrl).matches()){
-            new DownloadImage((ImageView) rootView.findViewById(R.id.bookCover)).execute(imgUrl);
-            rootView.findViewById(R.id.bookCover).setVisibility(View.VISIBLE);
+            new DownloadImage((ImageView) mRootView.findViewById(R.id.bookCover)).execute(imgUrl);
+            mRootView.findViewById(R.id.bookCover).setVisibility(View.VISIBLE);
         }
 
         String categories = data.getString(data.getColumnIndex(AlexandriaContract.CategoryEntry.CATEGORY));
-        ((TextView) rootView.findViewById(R.id.categories)).setText(categories);
+        ((TextView) mRootView.findViewById(R.id.categories)).setText(categories);
 
-        rootView.findViewById(R.id.add_button).setVisibility(View.VISIBLE);
-        rootView.findViewById(R.id.clear_button).setVisibility(View.VISIBLE);
+        mRootView.findViewById(R.id.add_button).setVisibility(View.VISIBLE);
+        mRootView.findViewById(R.id.clear_button).setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -198,13 +239,13 @@ public class SearchBookFragment extends Fragment
 
     // helper methods
     private void clearBookDetails(){
-        ((TextView) rootView.findViewById(R.id.bookTitle)).setText("");
-        ((TextView) rootView.findViewById(R.id.bookSubTitle)).setText("");
-        ((TextView) rootView.findViewById(R.id.authors)).setText("");
-        ((TextView) rootView.findViewById(R.id.categories)).setText("");
-        rootView.findViewById(R.id.bookCover).setVisibility(View.INVISIBLE);
-        rootView.findViewById(R.id.add_button).setVisibility(View.INVISIBLE);
-        rootView.findViewById(R.id.clear_button).setVisibility(View.INVISIBLE);
+        ((TextView) mRootView.findViewById(R.id.bookTitle)).setText("");
+        ((TextView) mRootView.findViewById(R.id.bookSubTitle)).setText("");
+        ((TextView) mRootView.findViewById(R.id.authors)).setText("");
+        ((TextView) mRootView.findViewById(R.id.categories)).setText("");
+        mRootView.findViewById(R.id.bookCover).setVisibility(View.INVISIBLE);
+        mRootView.findViewById(R.id.add_button).setVisibility(View.INVISIBLE);
+        mRootView.findViewById(R.id.clear_button).setVisibility(View.INVISIBLE);
     }
 
 

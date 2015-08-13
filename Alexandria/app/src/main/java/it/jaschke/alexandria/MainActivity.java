@@ -1,13 +1,13 @@
 package it.jaschke.alexandria;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getFragmentManager();
         Fragment nextFragment;
 
         switch (position){
