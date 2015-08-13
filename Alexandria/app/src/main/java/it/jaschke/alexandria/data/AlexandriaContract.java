@@ -7,7 +7,6 @@ package it.jaschke.alexandria.data;
 import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.util.Log;
 
 public class AlexandriaContract{
 
@@ -34,11 +33,8 @@ public class AlexandriaContract{
         public static final String TABLE_NAME = "books";
 
         public static final String TITLE = "title";
-
         public static final String IMAGE_URL = "imgurl";
-
         public static final String SUBTITLE = "subtitle";
-
         public static final String DESC = "description";
 
         public static Uri buildBookUri(long id) {

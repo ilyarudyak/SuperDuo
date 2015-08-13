@@ -17,7 +17,7 @@ import it.jaschke.alexandria.services.DownloadImage;
 /**
  * Created by saj on 11/01/15.
  */
-public class BookListAdapter extends CursorAdapter {
+public class BookAdapter extends CursorAdapter {
 
 
     public static class ViewHolder {
@@ -32,7 +32,7 @@ public class BookListAdapter extends CursorAdapter {
         }
     }
 
-    public BookListAdapter(Context context, Cursor c, int flags) {
+    public BookAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
     }
 
