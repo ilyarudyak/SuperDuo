@@ -25,6 +25,7 @@ import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.BookService;
 import it.jaschke.alexandria.services.DownloadImage;
 import it.jaschke.alexandria.utils.NetworkUtils;
+import it.jaschke.alexandria.utils.PrefUtils;
 
 
 public class SearchBookFragment extends Fragment
@@ -53,6 +54,9 @@ public class SearchBookFragment extends Fragment
         if (!isConnected) {
             Toast.makeText(getActivity(), TOAST_NOT_CONNECTED, Toast.LENGTH_LONG).show();
         }
+
+        // check live search prefs
+        isLiveSearch = PrefUtils.isSearchLive(getActivity());
     }
 
     @Override

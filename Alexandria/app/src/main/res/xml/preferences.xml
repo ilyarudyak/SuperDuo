@@ -7,15 +7,16 @@
     >
 
     <ListPreference
-        android:key="pref_start_fragment"
+        android:key="@string/pref_start_screen_key"
         android:title="@string/pref_start_screen_title"
         android:summary="%s"
         android:entries="@array/pref_start_entries"
         android:entryValues="@array/pref_start_values"
         android:defaultValue="0"/>
 
+    <!-- TODO add default boolean -->
     <CheckBoxPreference
-        android:key="pref_live_search"
+        android:key="@string/pref_live_search_key"
         android:title="@string/pref_live_search_title"
         android:summaryOn="@string/pref_live_search_summary_enabled"
         android:summaryOff="@string/pref_live_search_summary_disabled"
