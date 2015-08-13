@@ -127,6 +127,6 @@ public class LibraryFragment extends Fragment
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        activity.setTitle(R.string.books);
+        activity.setTitle(R.string.library);
     }
 }

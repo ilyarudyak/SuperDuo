@@ -7,10 +7,20 @@
     >
 
     <ListPreference
-        android:key="pref_startFragment"
-        android:title="@string/pref_startScreen"
-        android:entries="@array/pref_start_options"
+        android:key="pref_start_fragment"
+        android:title="@string/pref_start_screen_title"
+        android:summary="%s"
+        android:entries="@array/pref_start_entries"
         android:entryValues="@array/pref_start_values"
-        />
+        android:defaultValue="0"/>
+
+    <CheckBoxPreference
+        android:key="pref_live_search"
+        android:title="@string/pref_live_search_title"
+        android:summaryOn="@string/pref_live_search_summary_enabled"
+        android:summaryOff="@string/pref_live_search_summary_disabled"
+        android:defaultValue="false" />
+
+
 
 </PreferenceScreen>
