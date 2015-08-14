@@ -74,19 +74,19 @@ public class BookSearchFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // retain fragment after configuration change
+        setRetainInstance(true);
+
         mRootView = inflater.inflate(R.layout.fragment_search_book, container, false);
 
         setEanEditText();
         setSearchButton();
 
         setEmptyBookDetails();
-
         setClearAddButtons();
 
-        if(savedInstanceState != null){
-            mEanEditText.setText(savedInstanceState.getString(EAN_CONTENT));
-            mEanEditText.setHint("");
-        }
+        // fill book details view if mBook is available
+        fillBookDetails();
 
         return mRootView;
     }
@@ -95,14 +95,6 @@ public class BookSearchFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         activity.setTitle(R.string.search_book);
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if(mEanEditText !=null) {
-            outState.putString(EAN_CONTENT, mEanEditText.getText().toString());
-        }
     }
 
     // helper methods
@@ -214,11 +206,13 @@ public class BookSearchFragment extends Fragment {
         setBookCover();
     }
     private void setBookCover() {
-        Picasso.with(getActivity())
-                .load(mBook.getImgUrl())
-                .placeholder(R.raw.placeholder_detail)
-                .resize(320, 410)
-                .into(mBookCover);
+        if (mBook != null) {
+            Picasso.with(getActivity())
+                    .load(mBook.getImgUrl())
+                    .placeholder(R.raw.placeholder_detail)
+                    .resize(320, 410)
+                    .into(mBookCover);
+        }
     }
     private void clearBookDetails(){
         mBookTitle.setText("");
