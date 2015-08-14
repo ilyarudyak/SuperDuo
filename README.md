@@ -21,8 +21,8 @@ We add boolean `isLiveSearch` variable to `SearchBookFragment` and and option to
 3. While a user is waiting for a result we insert data into database and than call it. It's better to show the result ASAP. So we refactor service - we just show result ASAP. We insert a book into DB after user clicks on `Add` button using another AsyncTask. 
 
 ### Configuration changes
-`SearchBookFragment` has `onSaveInstanceState()` method where we save *only* `ean` value. In `onCreateView()` we check if `savedInstanceState != null` and get back this value. Than we use `Service` to get book details from DB or network. In other words we fetch book detail again.
-We have 2 options: a) put `mBook` into `savedInstanceState` or b) just retain the fragment with `setRetainInstance(true)`. We use the second option.
+`SearchBookFragment` has `onSaveInstanceState()` method where we save *only* `ean` value. In `onCreateView()` we check if `savedInstanceState != null` and get back this value. Than we use `Service` to get book details from DB or network. In other words we fetch book detail again. In fact we don't need `onSaveInstanceState()` - `EditText` field will be saved during configuration changes automatically.
+We have 2 options: a) put `mBook` into `savedInstanceState` or b) just retain the fragment with `setRetainInstance(true)`. We use the second option - we have to handle only configuration changes, not process termination. 
 
 ## Changes in components
 ### Settings      
