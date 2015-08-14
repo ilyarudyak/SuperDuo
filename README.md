@@ -2,8 +2,10 @@
 Project 3 from Udacity nanodegree
 
 # Alexandria
-I've significantly modified this app. Basically there are *a lot problems* with it. They are described below. 
-## User feadback
+I've significantly modified this app. Basically there are *a lot problems* with it. They are described below. *Disclaimer. We don't touch tablet layout in any way. It can be broken after our modifications.*
+
+## Major problems
+### User feadback
 > This app is terrible. They say you can scan books, but that functionality isn’t in the app yet. It also crashed on me when I tried to add the book my sister was reading on the flight to London.
 
 We check if we have internet connection in `onStart()` method in `SearchBookFragment`. If no connection is available we notify a user with a toast and disable interface (both `mEanEditText` and `searchButton`).
@@ -13,14 +15,18 @@ We check if we have internet connection in `onStart()` method in `SearchBookFrag
 We think that automatic search that is currently available in the app is awesome. it looks like live search in Google. But some users may not like it. So we decided to make it optional. Default option is to press `Search` button to get search resaults but user can choose switch to live search. Again this is probably very familiar UI for those who use it in Google search.
 We add boolean `isLiveSearch` variable to `SearchBookFragment` and and option to `Settings`. So we remove `TextChangedListener` from `mEanEditText` in case user choose not to use live search. In this case `searchButton` is invisible - we just don't use it.
 
-## Major changes
-### Settings      
-1. We've added summary in `ListPreference` and use `Preference Fragment`istead of `Preference Activity`. We've also added default values. We've added `CheckBoxPreference` for user to choose live search option.
-
 ### Service
 1. When a user enters ISBN `SearchBookFragment` starts a service that calls Google API. This service downloads JSON file, parse it and add entry to DB automatically. Than the fragment calls DB using `Loader`. This is somewhat arguable solution.
 2. Why do we use a service? This is a task that closely related to the foreground activity. A user is waiting for a search result, so this activity will probably still be in foreground when results ariives. Should we use simple AsyncTask in this case? And a proper use of `Loader` is probably in `LibraryFragment`.
 3. While a user is waiting for a result we insert data into database and than call it. It's better to show the result ASAP. So we refactor service - we just show result ASAP. We insert a book into DB after user clicks on `Add` button using another AsyncTask. 
+
+### Configuration changes
+`SearchBookFragment` has `onSaveInstanceState()` method where we save *only* `ean` value. In `onCreateView()` we check if `savedInstanceState != null` and get back this value. Than we use `Service` to get book details from DB or network. In other words we fetch book detail again.
+We have 2 options: a) put `mBook` into `savedInstanceState` or b) just retain the fragment with `setRetainInstance(true)`. We use the second option.
+
+## Changes in components
+### Settings      
+We've added summary in `ListPreference` and use `Preference Fragment`istead of `Preference Activity`. We've also added default values. We've added `CheckBoxPreference` for user to choose live search option.
 
 ### BookSearchFragment
 1. We add check for connectivity. If no connection is available we: a) notify a user with a toast and b) make both `mEanEditText` and `mSearchButton` inactive;
@@ -28,7 +34,8 @@ We add boolean `isLiveSearch` variable to `SearchBookFragment` and and option to
 3. We refactor buttons. We don't use service and we don't add a book to DB automatically. Now we have: a) `Clear` button - just clear screen (doesn't delete from DB); b) `Add` button - adds a book to DB.
 4. We created `Book` class and store an instance in a member variable. We assign the value after search and than we use it for creating book details layout.
 5. We add scan functionality to `MainActivity` and a `Scanner` button to `ActionBar`. We use `ZXing` library as described in Mark Murphy manual. After scanning is performed we create new BookSearchFragment with ISBN field filled in. Fragment behavior after that depends on live search option.
-6. We use `Picasso library` to download book covers.
+6. We use `Picasso library` to download book covers. And we refactor book details layout - it renders poorly on our devices (Nexus 5 etc.) both for portrait and landscape.
+7. We add `setRetainInstance(true)` to retain fragment instance after configuration change (usually - after rotation).
 
 ## Design
 ### Buttons
