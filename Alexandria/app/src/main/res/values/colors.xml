@@ -10,6 +10,8 @@
     <!-- text colors -->
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
+
+    <!-- standard colors-->
     <color name="white">#FFFFFF</color>
 
 </resources>

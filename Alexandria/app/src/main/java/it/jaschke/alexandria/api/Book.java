@@ -92,4 +92,10 @@ public class Book {
                 ", categories=" + categories +
                 '}';
     }
+    public String getAuthorsAsString() {
+        return authors.toString().replace("[" , "").replace("]", "");
+    }
+    public String getCategoriesAsString() {
+        return categories.toString().replace("[" , "").replace("]", "");
+    }
 }

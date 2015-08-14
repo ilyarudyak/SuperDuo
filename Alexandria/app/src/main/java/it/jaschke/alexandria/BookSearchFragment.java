@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import it.jaschke.alexandria.api.Book;
 import it.jaschke.alexandria.utils.DbUtils;
 import it.jaschke.alexandria.utils.NetworkUtils;
@@ -72,7 +74,7 @@ public class BookSearchFragment extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mRootView = inflater.inflate(R.layout.fragment_add_book, container, false);
+        mRootView = inflater.inflate(R.layout.fragment_search_book, container, false);
 
         setEanEditText();
         setSearchButton();
@@ -203,12 +205,20 @@ public class BookSearchFragment extends Fragment {
         if (mBook != null) {
             mBookTitle.setText(mBook.getTitle());
             mBookSubTitle.setText(mBook.getSubtitle());
-            mBookAuthors.setText(mBook.getAuthors().toString());
-            mBookCategories.setText(mBook.getCategories().toString());
+            mBookAuthors.setText(mBook.getAuthorsAsString());
+            mBookCategories.setText(mBook.getCategoriesAsString());
             mBookCover.setVisibility(View.VISIBLE);
             mAddButton.setVisibility(View.VISIBLE);
             mClearButton.setVisibility(View.VISIBLE);
         }
+        setBookCover();
+    }
+    private void setBookCover() {
+        Picasso.with(getActivity())
+                .load(mBook.getImgUrl())
+                .placeholder(R.raw.placeholder_detail)
+                .resize(320, 410)
+                .into(mBookCover);
     }
     private void clearBookDetails(){
         mBookTitle.setText("");
