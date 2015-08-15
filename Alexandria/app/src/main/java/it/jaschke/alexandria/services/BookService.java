@@ -62,7 +62,16 @@ public class BookService extends IntentService {
      */
     private void deleteBook(String ean) {
         if(ean!=null) {
-            getContentResolver().delete(AlexandriaContract.BookEntry.buildBookUri(Long.parseLong(ean)), null, null);
+            getContentResolver().delete(AlexandriaContract.BookEntry
+                    .buildBookUri(Long.parseLong(ean)), null, null);
+
+            getContentResolver().delete(
+                    AlexandriaContract.AuthorEntry.CONTENT_URI,
+                    AlexandriaContract.AuthorEntry._ID + "=" + ean, null);
+
+            getContentResolver().delete(
+                    AlexandriaContract.CategoryEntry.CONTENT_URI,
+                    AlexandriaContract.CategoryEntry._ID + "=" + ean, null);
         }
     }
 
