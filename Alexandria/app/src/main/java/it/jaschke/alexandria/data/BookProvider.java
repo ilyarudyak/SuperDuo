@@ -143,8 +143,11 @@ public class BookProvider extends ContentProvider {
                     AlexandriaContract.BookEntry.TABLE_NAME + "." + AlexandriaContract.BookEntry.SUBTITLE,
                     AlexandriaContract.BookEntry.TABLE_NAME + "." + AlexandriaContract.BookEntry.IMAGE_URL,
                     AlexandriaContract.BookEntry.TABLE_NAME + "." + AlexandriaContract.BookEntry.DESC,
-                    "group_concat(DISTINCT " + AlexandriaContract.AuthorEntry.TABLE_NAME+ "."+ AlexandriaContract.AuthorEntry.AUTHOR +", ', ') as " + AlexandriaContract.AuthorEntry.AUTHOR,
-                    "group_concat(DISTINCT " + AlexandriaContract.CategoryEntry.TABLE_NAME+ "."+ AlexandriaContract.CategoryEntry.CATEGORY +", ', ') as " + AlexandriaContract.CategoryEntry.CATEGORY
+                    "group_concat(DISTINCT " + AlexandriaContract.AuthorEntry.TABLE_NAME+ "."+
+                            AlexandriaContract.AuthorEntry.AUTHOR + ") as " + AlexandriaContract.AuthorEntry.AUTHOR,
+                    "group_concat(DISTINCT " + AlexandriaContract.CategoryEntry.TABLE_NAME+ "."+
+                            AlexandriaContract.CategoryEntry.CATEGORY + ") as " +
+                            AlexandriaContract.CategoryEntry.CATEGORY
                 };
                 retCursor = bookFull.query(dbHelper.getReadableDatabase(),
                         bfd_projection,
@@ -156,7 +159,8 @@ public class BookProvider extends ContentProvider {
                 break;
             case BOOK_FULL:
                 String[] bf_projection ={
-                        AlexandriaContract.BookEntry.TABLE_NAME + "." + AlexandriaContract.BookEntry._ID,
+                        AlexandriaContract.BookEntry.TABLE_NAME + "." + AlexandriaContract.BookEntry._ID +
+                        " as " + AlexandriaContract.BookEntry._ID,
                         AlexandriaContract.BookEntry.TABLE_NAME + "." + AlexandriaContract.BookEntry.TITLE,
                         AlexandriaContract.BookEntry.TABLE_NAME + "." + AlexandriaContract.BookEntry.IMAGE_URL,
                         "group_concat(DISTINCT " + AlexandriaContract.AuthorEntry.TABLE_NAME+ "."
