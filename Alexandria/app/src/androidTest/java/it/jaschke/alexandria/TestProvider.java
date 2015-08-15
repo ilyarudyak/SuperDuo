@@ -3,24 +3,21 @@ package it.jaschke.alexandria;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
 import it.jaschke.alexandria.data.AlexandriaContract;
-import it.jaschke.alexandria.data.DbHelper;
 
 /**
  * Created by saj on 23/12/14.
  */
 public class TestProvider extends AndroidTestCase {
-    public static final String LOG_TAG = TestProvider.class.getSimpleName();
+    public static final String TAG = TestProvider.class.getSimpleName();
 
     public void setUp() {
         deleteAllRecords();
     }
-
     public void deleteAllRecords() {
         mContext.getContentResolver().delete(
                 AlexandriaContract.BookEntry.CONTENT_URI,
@@ -95,7 +92,6 @@ public class TestProvider extends AndroidTestCase {
         assertEquals(AlexandriaContract.CategoryEntry.CONTENT_ITEM_TYPE, type);
 
     }
-
     public void testInsertRead(){
 
         insertReadBook();
@@ -106,6 +102,7 @@ public class TestProvider extends AndroidTestCase {
         readFullList();
     }
 
+    // helper methods
     public void insertReadBook(){
         ContentValues bookValues = TestDb.getBookValues();
 
@@ -134,14 +131,13 @@ public class TestProvider extends AndroidTestCase {
         TestDb.validateCursor(cursor, bookValues);
 
     }
-
     public void insertReadAuthor(){
         ContentValues authorValues = TestDb.getAuthorValues();
 
         Uri authorUri = mContext.getContentResolver().insert(AlexandriaContract.AuthorEntry.CONTENT_URI, authorValues);
         long authorRowId = ContentUris.parseId(authorUri);
         assertTrue(authorRowId != -1);
-        assertEquals(authorRowId,TestDb.ean);
+        assertEquals(authorRowId, TestDb.ean);
 
         Cursor cursor = mContext.getContentResolver().query(
                 AlexandriaContract.AuthorEntry.CONTENT_URI,
@@ -164,7 +160,6 @@ public class TestProvider extends AndroidTestCase {
         TestDb.validateCursor(cursor, authorValues);
 
     }
-
     public void insertReadCategory(){
         ContentValues categoryValues = TestDb.getCategoryValues();
 
@@ -194,7 +189,6 @@ public class TestProvider extends AndroidTestCase {
         TestDb.validateCursor(cursor, categoryValues);
 
     }
-
     public void readFullBook(){
 
         Cursor cursor = mContext.getContentResolver().query(
@@ -207,7 +201,6 @@ public class TestProvider extends AndroidTestCase {
 
          TestDb.validateCursor(cursor, TestDb.getFullDetailValues());
     }
-
     public void readFullList(){
 
         Cursor cursor = mContext.getContentResolver().query(
@@ -219,6 +212,13 @@ public class TestProvider extends AndroidTestCase {
         );
 
         TestDb.validateCursor(cursor, TestDb.getFullListValues());
+    }
+
+    public void testFullBookUri() throws Throwable {
+
+        Log.d(TAG, AlexandriaContract.PATH_FULL_BOOK);
+        Log.d(TAG, AlexandriaContract.BookEntry.FULL_CONTENT_URI.toString());
+        Log.d(TAG, AlexandriaContract.BookEntry.buildFullBookUri(100).toString());
     }
 
 

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- this code seems to be from here:
+     http://android-developers.blogspot.ru/2009/02/android-layout-tricks-1.html-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
                 android:layout_height="?android:attr/listPreferredItemHeight"
@@ -6,18 +9,23 @@
 
     <ImageView
         android:id="@+id/fullBookCover"
+
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
+
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="6dip"
+
         android:contentDescription="@string/book_cover"
         android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/listBookTitle"
+
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
@@ -30,7 +38,7 @@
 
 
     <TextView
-        android:id="@+id/listBookSubTitle"
+        android:id="@+id/list_book_authors"
         android:layout_width="fill_parent"
         android:layout_height="26dip"
         android:singleLine="true"

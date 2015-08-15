@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import it.jaschke.alexandria.R;
 import it.jaschke.alexandria.data.AlexandriaContract;
 import it.jaschke.alexandria.services.DownloadImage;
@@ -23,32 +25,17 @@ public class BookAdapter extends CursorAdapter {
     public static class ViewHolder {
         public final ImageView bookCover;
         public final TextView bookTitle;
-        public final TextView bookSubTitle;
+        public final TextView bookAuthors;
 
         public ViewHolder(View view) {
             bookCover = (ImageView) view.findViewById(R.id.fullBookCover);
             bookTitle = (TextView) view.findViewById(R.id.listBookTitle);
-            bookSubTitle = (TextView) view.findViewById(R.id.listBookSubTitle);
+            bookAuthors = (TextView) view.findViewById(R.id.list_book_authors);
         }
     }
 
     public BookAdapter(Context context, Cursor c, int flags) {
         super(context, c, flags);
-    }
-
-    @Override
-    public void bindView(View view, Context context, Cursor cursor) {
-
-        ViewHolder viewHolder = (ViewHolder) view.getTag();
-
-        String imgUrl = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
-        new DownloadImage(viewHolder.bookCover).execute(imgUrl);
-
-        String bookTitle = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
-        viewHolder.bookTitle.setText(bookTitle);
-
-        String bookSubTitle = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.SUBTITLE));
-        viewHolder.bookSubTitle.setText(bookSubTitle);
     }
 
     @Override
@@ -59,5 +46,27 @@ public class BookAdapter extends CursorAdapter {
         view.setTag(viewHolder);
 
         return view;
+    }
+
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+
+        ViewHolder viewHolder = (ViewHolder) view.getTag();
+
+        String imgUrlStr = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.IMAGE_URL));
+        new DownloadImage(viewHolder.bookCover).execute(imgUrlStr);
+
+        Picasso.with(mContext)
+                .load(imgUrlStr)
+                .placeholder(R.raw.placeholder)
+                .error(R.raw.placeholder)
+                .resize(130, 170)
+                .into(viewHolder.bookCover);
+
+        String bookTitleStr = cursor.getString(cursor.getColumnIndex(AlexandriaContract.BookEntry.TITLE));
+        viewHolder.bookTitle.setText(bookTitleStr);
+
+        String bookAuthorsStr = cursor.getString(cursor.getColumnIndex(AlexandriaContract.AuthorEntry.AUTHOR));
+        viewHolder.bookAuthors.setText(bookAuthorsStr);
     }
 }
