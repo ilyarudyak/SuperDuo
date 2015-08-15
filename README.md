@@ -22,7 +22,11 @@ We add boolean `isLiveSearch` variable to `SearchBookFragment` and and option to
 
 ### Configuration changes
 `SearchBookFragment` has `onSaveInstanceState()` method where we save *only* `ean` value. In `onCreateView()` we check if `savedInstanceState != null` and get back this value. Than we use `Service` to get book details from DB or network. In other words we fetch book detail again. In fact we don't need `onSaveInstanceState()` - `EditText` field will be saved during configuration changes automatically.
-We have 2 options: a) put `mBook` into `savedInstanceState` or b) just retain the fragment with `setRetainInstance(true)`. We use the second option - we have to handle only configuration changes, not process termination. 
+We have 2 options: a) put `mBook` into `savedInstanceState` or b) just retain the fragment with `setRetainInstance(true)`. We use the second option - we have to handle only configuration changes, not process termination.
+
+### Miscellaneous bugs
+1. `deleteBook()` in `BookService` is incorrect. We delete only an entry from books table but not entries from `authors` and `categories` tables. We refactor this method.
+2. When we delete a book in `BookDetail` we return to `ListView` where this book is still presented.
 
 ## Changes in components
 ### Settings      
@@ -36,6 +40,9 @@ We've added summary in `ListPreference` and use `Preference Fragment`istead of `
 5. We add scan functionality to `MainActivity` and a `Scanner` button to `ActionBar`. We use `ZXing` library as described in Mark Murphy manual. After scanning is performed we create new BookSearchFragment with ISBN field filled in. Fragment behavior after that depends on live search option.
 6. We use `Picasso library` to download book covers. And we refactor book details layout - it renders poorly on our devices (Nexus 5 etc.) both for portrait and landscape.
 7. We add `setRetainInstance(true)` to retain fragment instance after configuration change (usually - after rotation).
+
+### BookAdapter
+We've added authors to adapter instead of subtitle - a lot of books just don't have a subtitle. We also use Picasso to download a cover of a book.
 
 ## Design
 ### Buttons
