@@ -98,7 +98,7 @@ public class BookSearchFragment extends Fragment {
     }
 
     // helper methods
-    private void setEanEditText() {
+    public void setEanEditText() {
 
         mEanEditText = (EditText) mRootView.findViewById(R.id.ean_edit_text);
 
@@ -238,6 +238,9 @@ public class BookSearchFragment extends Fragment {
             return ean;
         }
     }
+    public void setEanText(String text) {
+        mEanEditText.setText(text);
+    }
 
     // ----------------- async tasks -----------------
 
@@ -258,7 +261,6 @@ public class BookSearchFragment extends Fragment {
             }
         }
     }
-
     public class AddBookToDb extends AsyncTask<Book, Void, Void> {
 
         @Override

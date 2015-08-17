@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import it.jaschke.alexandria.api.Callback;
+import it.jaschke.alexandria.scan.ScanActivity;
 import it.jaschke.alexandria.settings.SettingsActivity;
 
 
@@ -129,6 +130,9 @@ public class MainActivity extends ActionBarActivity
             return true;
         } else if (id == R.id.action_about) {
             startActivity(new Intent(this, AboutActivity.class));
+            return true;
+        } else if (id == R.id.action_scan) {
+            startActivity(new Intent(this, ScanActivity.class));
             return true;
         }
 
