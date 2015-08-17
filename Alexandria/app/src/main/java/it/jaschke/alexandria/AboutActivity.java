@@ -2,7 +2,12 @@ package it.jaschke.alexandria;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.widget.TextView;
+
+import java.io.IOException;
+
+import it.jaschke.alexandria.utils.FileUtils;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -12,7 +17,13 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
 
         TextView aboutTextView = (TextView) findViewById(R.id.about_text_view);
-        aboutTextView.setText("this is just a test");
+        try {
+            String aboutString = Html.fromHtml(FileUtils.readAboutFile(this)).toString();
+            aboutTextView.setText(aboutString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
