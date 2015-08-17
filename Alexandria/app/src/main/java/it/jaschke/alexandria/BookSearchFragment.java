@@ -94,7 +94,7 @@ public class BookSearchFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        activity.setTitle(R.string.search_book);
+        activity.setTitle(R.string.search_book_title);
     }
 
     // helper methods

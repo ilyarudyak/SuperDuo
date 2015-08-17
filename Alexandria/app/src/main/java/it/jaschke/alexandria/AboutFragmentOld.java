@@ -8,23 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class AboutFragment extends Fragment {
+public class AboutFragmentOld extends Fragment {
 
-    public AboutFragment(){
+    public AboutFragmentOld(){
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_about, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_about_old, container, false);
         return rootView;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        activity.setTitle(R.string.about);
+        activity.setTitle(R.string.about_title);
     }
 
 }

@@ -81,7 +81,7 @@ public class MainActivity extends ActionBarActivity
                 nextFragment = new BookSearchFragment();
                 break;
             case 2:
-                nextFragment = new AboutFragment();
+                nextFragment = new AboutFragmentOld();
                 break;
 
         }
@@ -126,6 +126,9 @@ public class MainActivity extends ActionBarActivity
 
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        } else if (id == R.id.action_about) {
+            startActivity(new Intent(this, AboutActivity.class));
             return true;
         }
 
