@@ -39,7 +39,7 @@ public class PagerFragment extends Fragment {
             mMainFragments[i].setFragmentDate(mformat.format(fragmentdate));
         }
         mPagerHandler.setAdapter(mPagerAdapter);
-        mPagerHandler.setCurrentItem(MainActivity.currentFragment);
+        mPagerHandler.setCurrentItem(MainActivity.CURRENT_FRAGMENT);
         return rootView;
     }
 
