@@ -32,7 +32,8 @@ public class ScoresFetchService extends IntentService {
 
     public static final String LOG_TAG = ScoresFetchService.class.getSimpleName();
 
-    // see here: http://api.football-data.org/documentation; filter for timeFrame
+    // see here: http://api.football-data.org/documentation
+    // filter for timeFrame for past or next 2 days
     private static final String PAST_2_DAYS = "p2";
     private static final String NEXT_2_DAYS = "n2";
 
