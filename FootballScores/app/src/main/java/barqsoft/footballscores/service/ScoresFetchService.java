@@ -29,7 +29,12 @@ import barqsoft.footballscores.R;
  * Created by yehya khaled on 3/2/2015.
  */
 public class ScoresFetchService extends IntentService {
-    public static final String LOG_TAG = "myFetchService";
+
+    public static final String LOG_TAG = ScoresFetchService.class.getSimpleName();
+
+    // see here: http://api.football-data.org/documentation; filter for timeFrame
+    private static final String PAST_2_DAYS = "p2";
+    private static final String NEXT_2_DAYS = "n2";
 
     public ScoresFetchService() {
         super("myFetchService");
@@ -39,8 +44,6 @@ public class ScoresFetchService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         getData("n2");
         getData("p2");
-
-        return;
     }
 
     private void getData(String timeFrame) {
@@ -208,15 +211,15 @@ public class ScoresFetchService extends IntentService {
                     Away_goals = match_data.getJSONObject(RESULT).getString(AWAY_GOALS);
                     match_day = match_data.getString(MATCH_DAY);
                     ContentValues match_values = new ContentValues();
-                    match_values.put(ScoresContract.ScoresTable.MATCH_ID, match_id);
-                    match_values.put(ScoresContract.ScoresTable.DATE_COL, mDate);
-                    match_values.put(ScoresContract.ScoresTable.TIME_COL, mTime);
-                    match_values.put(ScoresContract.ScoresTable.HOME_COL, Home);
-                    match_values.put(ScoresContract.ScoresTable.AWAY_COL, Away);
-                    match_values.put(ScoresContract.ScoresTable.HOME_GOALS_COL, Home_goals);
-                    match_values.put(ScoresContract.ScoresTable.AWAY_GOALS_COL, Away_goals);
-                    match_values.put(ScoresContract.ScoresTable.LEAGUE_COL, League);
-                    match_values.put(ScoresContract.ScoresTable.MATCH_DAY, match_day);
+                    match_values.put(ScoresContract.ScoresTable.MATCH_ID_COLUMN, match_id);
+                    match_values.put(ScoresContract.ScoresTable.DATE_COLUMN, mDate);
+                    match_values.put(ScoresContract.ScoresTable.TIME_COLUMN, mTime);
+                    match_values.put(ScoresContract.ScoresTable.HOME_COLUMN, Home);
+                    match_values.put(ScoresContract.ScoresTable.AWAY_COLUMN, Away);
+                    match_values.put(ScoresContract.ScoresTable.HOME_GOALS_COLUMN, Home_goals);
+                    match_values.put(ScoresContract.ScoresTable.AWAY_GOALS_COLUMN, Away_goals);
+                    match_values.put(ScoresContract.ScoresTable.LEAGUE_COLUMN, League);
+                    match_values.put(ScoresContract.ScoresTable.MATCH_DAY_COLUMN, match_day);
                     //log spam
 
                     //Log.v(LOG_TAG,matchId);

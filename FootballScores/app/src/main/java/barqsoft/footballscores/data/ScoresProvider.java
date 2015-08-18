@@ -17,16 +17,16 @@ public class ScoresProvider extends ContentProvider {
     private static final int MATCHES_WITH_ID = 102;
     private static final int MATCHES_WITH_DATE = 103;
 
-    private static ScoresDBHelper sOpenHelper;
+    private static ScoresDbHelper sOpenHelper;
 //    private static final SQLiteQueryBuilder sScoreQuery =
 //            new SQLiteQueryBuilder();
 
     private static final String SCORES_BY_LEAGUE =
-            ScoresContract.ScoresTable.LEAGUE_COL + " = ?";
+            ScoresContract.ScoresTable.LEAGUE_COLUMN + " = ?";
     private static final String SCORES_BY_DATE =
-            ScoresContract.ScoresTable.DATE_COL + " LIKE ?";
+            ScoresContract.ScoresTable.DATE_COLUMN + " LIKE ?";
     private static final String SCORES_BY_ID =
-            ScoresContract.ScoresTable.MATCH_ID + " = ?";
+            ScoresContract.ScoresTable.MATCH_ID_COLUMN + " = ?";
 
     private static UriMatcher sUriMatcher = buildUriMatcher();
     static UriMatcher buildUriMatcher() {
@@ -56,7 +56,7 @@ public class ScoresProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        sOpenHelper = new ScoresDBHelper(getContext());
+        sOpenHelper = new ScoresDbHelper(getContext());
         return false;
     }
 
@@ -93,24 +93,24 @@ public class ScoresProvider extends ContentProvider {
         switch (match) {
             case MATCHES:
                 retCursor = sOpenHelper.getReadableDatabase().query(
-                        ScoresContract.SCORES_TABLE,
+                        ScoresContract.ScoresTable.TABLE_NAME,
                         projection, null, null, null, null, sortOrder);
                 break;
             case MATCHES_WITH_DATE:
                 //Log.v(FetchScoreTask.LOG_TAG,selectionArgs[1]);
                 //Log.v(FetchScoreTask.LOG_TAG,selectionArgs[2]);
                 retCursor = sOpenHelper.getReadableDatabase().query(
-                        ScoresContract.SCORES_TABLE,
+                        ScoresContract.ScoresTable.TABLE_NAME,
                         projection, SCORES_BY_DATE, selectionArgs, null, null, sortOrder);
                 break;
             case MATCHES_WITH_ID:
                 retCursor = sOpenHelper.getReadableDatabase().query(
-                        ScoresContract.SCORES_TABLE,
+                        ScoresContract.ScoresTable.TABLE_NAME,
                         projection, SCORES_BY_ID, selectionArgs, null, null, sortOrder);
                 break;
             case MATCHES_WITH_LEAGUE:
                 retCursor = sOpenHelper.getReadableDatabase().query(
-                        ScoresContract.SCORES_TABLE,
+                        ScoresContract.ScoresTable.TABLE_NAME,
                         projection, SCORES_BY_LEAGUE, selectionArgs, null, null, sortOrder);
                 break;
             default:
@@ -137,7 +137,8 @@ public class ScoresProvider extends ContentProvider {
                 int returncount = 0;
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insertWithOnConflict(ScoresContract.SCORES_TABLE, null, value,
+                        long _id = db.insertWithOnConflict(
+                                ScoresContract.ScoresTable.TABLE_NAME, null, value,
                                 SQLiteDatabase.CONFLICT_REPLACE);
                         if (_id != -1) {
                             returncount++;

@@ -9,38 +9,41 @@ import barqsoft.footballscores.data.ScoresContract.ScoresTable;
 /**
  * Created by yehya khaled on 2/25/2015.
  */
-public class ScoresDBHelper extends SQLiteOpenHelper {
+public class ScoresDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "scores.db";
     private static final int DATABASE_VERSION = 1;
 
-    public ScoresDBHelper(Context context) {
+    public ScoresDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        final String CreateScoresTable = "CREATE TABLE "
-                + ScoresContract.SCORES_TABLE + " ("
-                + ScoresTable._ID + " INTEGER PRIMARY KEY,"
-                + ScoresTable.DATE_COL + " TEXT NOT NULL,"
-                + ScoresTable.TIME_COL + " INTEGER NOT NULL,"
-                + ScoresTable.HOME_COL + " TEXT NOT NULL,"
-                + ScoresTable.AWAY_COL + " TEXT NOT NULL,"
-                + ScoresTable.LEAGUE_COL + " INTEGER NOT NULL,"
-                + ScoresTable.HOME_GOALS_COL + " TEXT NOT NULL,"
-                + ScoresTable.AWAY_GOALS_COL + " TEXT NOT NULL,"
-                + ScoresTable.MATCH_ID + " INTEGER NOT NULL,"
-                + ScoresTable.MATCH_DAY + " INTEGER NOT NULL,"
-                + " UNIQUE (" + ScoresTable.MATCH_ID + ") ON CONFLICT REPLACE"
-                + " );";
-        db.execSQL(CreateScoresTable);
+
+        final String createScoresTable =           "CREATE TABLE "
+                + ScoresTable.TABLE_NAME +         " ("
+                + ScoresTable._ID +                " INTEGER PRIMARY KEY,"
+                + ScoresTable.DATE_COLUMN +        " TEXT NOT NULL,"
+                + ScoresTable.TIME_COLUMN +        " INTEGER NOT NULL,"
+                + ScoresTable.HOME_COLUMN +        " TEXT NOT NULL,"
+                + ScoresTable.AWAY_COLUMN +        " TEXT NOT NULL,"
+                + ScoresTable.LEAGUE_COLUMN +      " INTEGER NOT NULL,"
+                + ScoresTable.HOME_GOALS_COLUMN +  " TEXT NOT NULL,"
+                + ScoresTable.AWAY_GOALS_COLUMN +  " TEXT NOT NULL,"
+                + ScoresTable.MATCH_ID_COLUMN +    " INTEGER NOT NULL,"
+                + ScoresTable.MATCH_DAY_COLUMN +   " INTEGER NOT NULL,"
+                +                                  " UNIQUE ("
+                + ScoresTable.MATCH_ID_COLUMN +    ") ON CONFLICT REPLACE"
+                +                                  " );";
+
+        db.execSQL(createScoresTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        //Remove old values when upgrading.
-        db.execSQL("DROP TABLE IF EXISTS " + ScoresContract.SCORES_TABLE);
+        // this is just data from API so we can drop table on upgrade
+        db.execSQL("DROP TABLE IF EXISTS " + ScoresTable.TABLE_NAME);
     }
 }

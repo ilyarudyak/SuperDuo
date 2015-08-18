@@ -9,29 +9,30 @@ import android.provider.BaseColumns;
  */
 public class ScoresContract {
 
-    public static final String SCORES_TABLE = "scores_table";
+    public static final String CONTENT_AUTHORITY = "barqsoft.footballscores";
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    public static final String PATH = "scores";
 
     public static final class ScoresTable implements BaseColumns {
 
-        public static final String CONTENT_AUTHORITY = "barqsoft.footballscores";
-        public static final String PATH = "scores";
-        public static Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+        public static final String TABLE_NAME = "scores_table";
 
-        public static final String LEAGUE_COL = "league";
-        public static final String DATE_COL = "date";
-        public static final String TIME_COL = "time";
-        public static final String HOME_COL = "home";
-        public static final String AWAY_COL = "away";
-        public static final String HOME_GOALS_COL = "home_goals";
-        public static final String AWAY_GOALS_COL = "away_goals";
-        public static final String MATCH_ID = "matchId";
-        public static final String MATCH_DAY = "match_day";
+        public static final String LEAGUE_COLUMN =      "league";
+        public static final String DATE_COLUMN =        "date";
+        public static final String TIME_COLUMN =        "time";
+        public static final String HOME_COLUMN =        "home";
+        public static final String AWAY_COLUMN =        "away";
+        public static final String HOME_GOALS_COLUMN =  "home_goals";
+        public static final String AWAY_GOALS_COLUMN =  "away_goals";
+        public static final String MATCH_ID_COLUMN =    "match_id";
+        public static final String MATCH_DAY_COLUMN =   "match_day";
 
         public static final String CONTENT_TYPE =
                 ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
 
+        // TODO why league is not argument?
         public static Uri buildScoreWithLeague() {
             return BASE_CONTENT_URI.buildUpon().appendPath("league").build();
         }
