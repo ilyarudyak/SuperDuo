@@ -22,16 +22,16 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.Vector;
 
-import barqsoft.footballscores.DatabaseContract;
+import barqsoft.footballscores.data.ScoresContract;
 import barqsoft.footballscores.R;
 
 /**
  * Created by yehya khaled on 3/2/2015.
  */
-public class myFetchService extends IntentService {
+public class ScoresFetchService extends IntentService {
     public static final String LOG_TAG = "myFetchService";
 
-    public myFetchService() {
+    public ScoresFetchService() {
         super("myFetchService");
     }
 
@@ -106,12 +106,12 @@ public class myFetchService extends IntentService {
                 if (matches.length() == 0) {
                     //if there is no data, call the function on dummy data
                     //this is expected behavior during the off season.
-                    processJSONdata(getString(R.string.dummy_data), getApplicationContext(), false);
+                    processJsonData(getString(R.string.dummy_data), getApplicationContext(), false);
                     return;
                 }
 
 
-                processJSONdata(JSON_data, getApplicationContext(), true);
+                processJsonData(JSON_data, getApplicationContext(), true);
             } else {
                 //Could not Connect
                 Log.d(LOG_TAG, "Could not connect to server.");
@@ -121,7 +121,8 @@ public class myFetchService extends IntentService {
         }
     }
 
-    private void processJSONdata(String JSONdata, Context mContext, boolean isReal) {
+    private void processJsonData(String JSONdata,
+                                 Context mContext, boolean isReal) {
         //JSON data
         final String SERIE_A = "357";
         final String PREMIER_LEGAUE = "354";
@@ -207,18 +208,18 @@ public class myFetchService extends IntentService {
                     Away_goals = match_data.getJSONObject(RESULT).getString(AWAY_GOALS);
                     match_day = match_data.getString(MATCH_DAY);
                     ContentValues match_values = new ContentValues();
-                    match_values.put(DatabaseContract.scores_table.MATCH_ID, match_id);
-                    match_values.put(DatabaseContract.scores_table.DATE_COL, mDate);
-                    match_values.put(DatabaseContract.scores_table.TIME_COL, mTime);
-                    match_values.put(DatabaseContract.scores_table.HOME_COL, Home);
-                    match_values.put(DatabaseContract.scores_table.AWAY_COL, Away);
-                    match_values.put(DatabaseContract.scores_table.HOME_GOALS_COL, Home_goals);
-                    match_values.put(DatabaseContract.scores_table.AWAY_GOALS_COL, Away_goals);
-                    match_values.put(DatabaseContract.scores_table.LEAGUE_COL, League);
-                    match_values.put(DatabaseContract.scores_table.MATCH_DAY, match_day);
+                    match_values.put(ScoresContract.ScoresTable.MATCH_ID, match_id);
+                    match_values.put(ScoresContract.ScoresTable.DATE_COL, mDate);
+                    match_values.put(ScoresContract.ScoresTable.TIME_COL, mTime);
+                    match_values.put(ScoresContract.ScoresTable.HOME_COL, Home);
+                    match_values.put(ScoresContract.ScoresTable.AWAY_COL, Away);
+                    match_values.put(ScoresContract.ScoresTable.HOME_GOALS_COL, Home_goals);
+                    match_values.put(ScoresContract.ScoresTable.AWAY_GOALS_COL, Away_goals);
+                    match_values.put(ScoresContract.ScoresTable.LEAGUE_COL, League);
+                    match_values.put(ScoresContract.ScoresTable.MATCH_DAY, match_day);
                     //log spam
 
-                    //Log.v(LOG_TAG,match_id);
+                    //Log.v(LOG_TAG,matchId);
                     //Log.v(LOG_TAG,mDate);
                     //Log.v(LOG_TAG,mTime);
                     //Log.v(LOG_TAG,Home);
@@ -233,7 +234,7 @@ public class myFetchService extends IntentService {
             ContentValues[] insert_data = new ContentValues[values.size()];
             values.toArray(insert_data);
             inserted_data = mContext.getContentResolver().bulkInsert(
-                    DatabaseContract.BASE_CONTENT_URI, insert_data);
+                    ScoresContract.BASE_CONTENT_URI, insert_data);
 
             //Log.v(LOG_TAG,"Succesfully Inserted : " + String.valueOf(inserted_data));
         } catch (JSONException e) {

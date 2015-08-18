@@ -7,24 +7,28 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends ActionBarActivity
-{
-    public static int selected_match_id;
-    public static int current_fragment = 2;
-    private final String save_tag = "Save Test";
-    private PagerFragment my_main;
+public class MainActivity extends ActionBarActivity {
+
+    public static int selectedMatchId;
+    public static int currentFragment = 2;
+
+    private final String saveTag = "Save Test";
+    private PagerFragment pagerFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            my_main = new PagerFragment();
+            pagerFragment = new PagerFragment();
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, my_main)
+                    .add(R.id.container, pagerFragment)
                     .commit();
         }
     }
 
+
+    // ----------------- menu ---------------------------
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -41,9 +45,8 @@ public class MainActivity extends ActionBarActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_about)
-        {
-            Intent start_about = new Intent(this,AboutActivity.class);
+        if (id == R.id.action_about) {
+            Intent start_about = new Intent(this, AboutActivity.class);
             startActivity(start_about);
             return true;
         }
@@ -51,27 +54,27 @@ public class MainActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+    // -----------------  config. changes -----------------
+
     @Override
-    protected void onSaveInstanceState(Bundle outState)
-    {
-        Log.v(save_tag,"will save");
-        Log.v(save_tag,"fragment: "+String.valueOf(my_main.mPagerHandler.getCurrentItem()));
-        Log.v(save_tag,"selected id: "+selected_match_id);
-        outState.putInt("Pager_Current",my_main.mPagerHandler.getCurrentItem());
-        outState.putInt("Selected_match",selected_match_id);
-        getSupportFragmentManager().putFragment(outState,"my_main",my_main);
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.v(saveTag, "will save");
+        Log.v(saveTag, "fragment: " + String.valueOf(pagerFragment.mPagerHandler.getCurrentItem()));
+        Log.v(saveTag, "selected id: " + selectedMatchId);
+        outState.putInt("Pager_Current", pagerFragment.mPagerHandler.getCurrentItem());
+        outState.putInt("Selected_match", selectedMatchId);
+        getSupportFragmentManager().putFragment(outState, "pagerFragment", pagerFragment);
         super.onSaveInstanceState(outState);
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState)
-    {
-        Log.v(save_tag,"will retrive");
-        Log.v(save_tag,"fragment: "+String.valueOf(savedInstanceState.getInt("Pager_Current")));
-        Log.v(save_tag,"selected id: "+savedInstanceState.getInt("Selected_match"));
-        current_fragment = savedInstanceState.getInt("Pager_Current");
-        selected_match_id = savedInstanceState.getInt("Selected_match");
-        my_main = (PagerFragment) getSupportFragmentManager().getFragment(savedInstanceState,"my_main");
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.v(saveTag, "will retrive");
+        Log.v(saveTag, "fragment: " + String.valueOf(savedInstanceState.getInt("Pager_Current")));
+        Log.v(saveTag, "selected id: " + savedInstanceState.getInt("Selected_match"));
+        currentFragment = savedInstanceState.getInt("Pager_Current");
+        selectedMatchId = savedInstanceState.getInt("Selected_match");
+        pagerFragment = (PagerFragment) getSupportFragmentManager().getFragment(savedInstanceState, "pagerFragment");
         super.onRestoreInstanceState(savedInstanceState);
     }
 }
