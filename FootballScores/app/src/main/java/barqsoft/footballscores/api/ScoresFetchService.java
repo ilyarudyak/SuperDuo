@@ -1,4 +1,4 @@
-package barqsoft.footballscores.service;
+package barqsoft.footballscores.api;
 
 import android.app.IntentService;
 import android.content.ContentValues;
@@ -42,19 +42,17 @@ public class ScoresFetchService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        getData("n2");
-        getData("p2");
+        getData(PAST_2_DAYS);
+        getData(NEXT_2_DAYS);
     }
 
     private void getData(String timeFrame) {
         //Creating fetch URL
-        final String BASE_URL = "http://api.football-data.org/alpha/fixtures"; //Base URL
-        final String QUERY_TIME_FRAME = "timeFrame"; //Time Frame parameter to determine days
-        //final String QUERY_MATCH_DAY = "matchday";
+        final String BASE_URL = "http://api.football-data.org/alpha/fixtures";
+        final String QUERY_TIME_FRAME = "timeFrame";
 
         Uri fetch_build = Uri.parse(BASE_URL).buildUpon().
                 appendQueryParameter(QUERY_TIME_FRAME, timeFrame).build();
-        //Log.v(LOG_TAG, fetch_build.toString()); //log spam
         HttpURLConnection m_connection = null;
         BufferedReader reader = null;
         String JSON_data = null;
@@ -63,7 +61,7 @@ public class ScoresFetchService extends IntentService {
             URL fetch = new URL(fetch_build.toString());
             m_connection = (HttpURLConnection) fetch.openConnection();
             m_connection.setRequestMethod("GET");
-            m_connection.addRequestProperty("X-Auth-Token", "e136b7858d424b9da07c88f28b61989a");
+            m_connection.addRequestProperty("X-Auth-Token", ApiKey.KEY);
             m_connection.connect();
 
             // Read the input stream into a String

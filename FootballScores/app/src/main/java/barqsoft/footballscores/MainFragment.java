@@ -16,7 +16,7 @@ import android.widget.ListView;
 import barqsoft.footballscores.adapter.ScoresAdapter;
 import barqsoft.footballscores.adapter.ViewHolder;
 import barqsoft.footballscores.data.ScoresContract;
-import barqsoft.footballscores.service.ScoresFetchService;
+import barqsoft.footballscores.api.ScoresFetchService;
 
 /**
  * A placeholder fragment containing a simple view.
