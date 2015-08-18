@@ -6,13 +6,21 @@
     <string name="library_title">Library</string>
     <string name="search_book_title">Search Book</string>
     <string name="about_title">About</string>
+    <string name="scan_title">Scan</string>
 
-    <!-- AddBook fragment-->
+    <!-- Other menu items -->
+    <string name="action_settings">Settings</string>
+    <string name="action_scan">Scan</string>
+
+    <!-- BookSearch fragment-->
     <string name="input_hint">Enter ISBN-10 or -13</string>
     <string name="search_button">Search</string>
 
     <string name="add_button">Add</string>
     <string name="clear_button">Clear</string>
+
+    <!-- ScanFragments -->
+    <string name="scan_button">Scan</string>
 
     <!-- Preferences -->
     <string name="title_activity_settings">Settings</string>
@@ -28,26 +36,22 @@
     <string name="pref_live_search_summary_disabled">Disabled</string>
 
 
+
+
+
     <!--Other strings-->
     <string name="navigation_drawer_open" >Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Settings</string>
-
     <string name="book_cover">Cover</string>
-
-
     <string name="not_found">No Book found</string>
     <string name="search">Search</string>
     <string name="delete">Delete Book</string>
-
-
     <string name="action_share">Share</string>
     <string name="back_button">go back</string>
     <string name="share_text">A must read book: </string>
+    <string name="about_text">This an old about. </string>
+    <string name="title_activity_scan">ScanActivity</string>
 
-
-    <string name="about_text">This application gets book information from a Google API. All titles, cover images, and author information come from there.
-    The original version of this app was built by Sascha Jaschke, and a modified version is given to students in the Udacity Android Nanodegree program. </string>
 
 
 </resources>

@@ -45,6 +45,11 @@
             android:label="@string/about_title"
             android:parentActivityName=".MainActivity" >
         </activity>
+        <activity
+            android:name=".scan.ScanActivity"
+            android:label="@string/title_activity_scan"
+            android:parentActivityName=".MainActivity" >
+        </activity>
     </application>
 
 </manifest>
