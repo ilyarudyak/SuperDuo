@@ -42,7 +42,6 @@ public class MainFragment extends Fragment
         return mf;
     }
 
-
     public MainFragment() {
     }
 

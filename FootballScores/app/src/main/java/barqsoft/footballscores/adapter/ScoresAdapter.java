@@ -40,7 +40,7 @@ public class ScoresAdapter extends CursorAdapter
         View mItem = LayoutInflater.from(context).inflate(R.layout.scores_list_item, parent, false);
         ViewHolder mHolder = new ViewHolder(mItem);
         mItem.setTag(mHolder);
-        //Log.v(FetchScoreTask.LOG_TAG,"new View inflated");
+        //Log.v(FetchScoreTask.TAG,"new View inflated");
         return mItem;
     }
 
@@ -58,15 +58,15 @@ public class ScoresAdapter extends CursorAdapter
         mHolder.awayCrest.setImageResource(MiscUtils.getTeamCrestByTeamName(
                 cursor.getString(COL_AWAY)
         ));
-        //Log.v(FetchScoreTask.LOG_TAG,mHolder.homeName.getText() + " Vs. " + mHolder.awayName.getText() +" id " + String.valueOf(mHolder.matchId));
-        //Log.v(FetchScoreTask.LOG_TAG,String.valueOf(detailMatchId));
+        //Log.v(FetchScoreTask.TAG,mHolder.homeName.getText() + " Vs. " + mHolder.awayName.getText() +" id " + String.valueOf(mHolder.matchId));
+        //Log.v(FetchScoreTask.TAG,String.valueOf(detailMatchId));
         LayoutInflater vi = (LayoutInflater) context.getApplicationContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = vi.inflate(R.layout.fragment_detail, null);
         ViewGroup container = (ViewGroup) view.findViewById(R.id.details_fragment_container);
         if(mHolder.matchId == detailMatchId)
         {
-            //Log.v(FetchScoreTask.LOG_TAG,"will insert extraView");
+            //Log.v(FetchScoreTask.TAG,"will insert extraView");
 
             container.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                     , ViewGroup.LayoutParams.MATCH_PARENT));

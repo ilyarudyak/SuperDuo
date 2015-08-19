@@ -47,6 +47,7 @@ public class NetworkUtils {
             URL url = buildUrl(timeFrame);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
+            urlConnection.addRequestProperty("X-Auth-Token", ApiKey.KEY);
             urlConnection.connect();
 
             InputStream in = urlConnection.getInputStream();
@@ -71,11 +72,11 @@ public class NetworkUtils {
     private static URL buildUrl(String timeFrame) throws MalformedURLException {
         final String FORECAST_BASE_URL = "http://api.football-data.org/alpha/fixtures";
         final String QUERY_PARAM = "timeFrame";
-        final String API_KEY = "X-Auth-Token";
+//        final String API_KEY = "X-Auth-Token";
 
         Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
                 .appendQueryParameter(QUERY_PARAM, timeFrame)
-                .appendQueryParameter(API_KEY, ApiKey.KEY)
+//                .appendQueryParameter(API_KEY, ApiKey.KEY)
                 .build();
         return new URL(builtUri.toString());
     }

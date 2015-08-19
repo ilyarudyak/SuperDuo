@@ -42,42 +42,10 @@ public class JsonParser {
     private static final String MATCH_DAY =             "matchday";
     private static final String HREF =                  "href";
 
-    private static boolean isKnownLeague(String league) {
-        if (league.equals(PREMIER_LEAGUE)   ||
-            league.equals(SERIE_A)          ||
-            league.equals(CHAMPIONS_LEAGUE) ||
-            league.equals(BUNDESLIGA)       ||
-            league.equals(PRIMERA_DIVISION)
-            ) {
-            return true;
-        }
-        return false;
-    }
 
-    private static void setDateTime(Match m, String date) {
 
-        String time = date.substring(date.indexOf("T") + 1, date.indexOf("Z"));
-        date = date.substring(0, date.indexOf("T"));
-        SimpleDateFormat match_date = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
-        match_date.setTimeZone(TimeZone.getTimeZone("UTC"));
-        try {
-            Date parseddate = match_date.parse(date + time);
-            SimpleDateFormat new_date = new SimpleDateFormat("yyyy-MM-dd:HH:mm");
-            new_date.setTimeZone(TimeZone.getDefault());
-            date = new_date.format(parseddate);
-            time = date.substring(date.indexOf(":") + 1);
-            date = date.substring(0, date.indexOf(":"));
-
-            m.setDate(date);
-            m.setTime(time);
-
-        } catch (Exception e) {
-            Log.d(TAG, "error here!");
-            Log.e(TAG, e.getMessage());
-        }
-    }
-
-    public static List<Match> parseScoresJsonStr(String scoresJsonStr) throws JSONException {
+    public static List<Match> parseScoresJsonStr(String scoresJsonStr, boolean isAllLeagues)
+            throws JSONException {
 
         List<Match> matchList = new ArrayList<>();
         JSONArray matches = new JSONObject(scoresJsonStr).getJSONArray(FIXTURES);
@@ -92,7 +60,8 @@ public class JsonParser {
                                      .getString(HREF)
                                      .replace(SEASON_LINK, "");
 
-            if (isKnownLeague(league)) {
+            // if isAllLeagues is set we return matches from ALL leagues
+            if (isKnownLeague(league) || isAllLeagues) {
 
                 match.setLeague(league);                                        // (1) league
 
@@ -118,5 +87,40 @@ public class JsonParser {
             }
         }
         return matchList;
+    }
+
+    // helper methods
+    private static void setDateTime(Match m, String date) {
+
+        String time = date.substring(date.indexOf("T") + 1, date.indexOf("Z"));
+        date = date.substring(0, date.indexOf("T"));
+        SimpleDateFormat match_date = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
+        match_date.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            Date parseddate = match_date.parse(date + time);
+            SimpleDateFormat new_date = new SimpleDateFormat("yyyy-MM-dd:HH:mm");
+            new_date.setTimeZone(TimeZone.getDefault());
+            date = new_date.format(parseddate);
+            time = date.substring(date.indexOf(":") + 1);
+            date = date.substring(0, date.indexOf(":"));
+
+            m.setDate(date);
+            m.setTime(time);
+
+        } catch (Exception e) {
+            Log.d(TAG, "error here!");
+            Log.e(TAG, e.getMessage());
+        }
+    }
+    private static boolean isKnownLeague(String league) {
+        if (league.equals(PREMIER_LEAGUE)   ||
+                league.equals(SERIE_A)          ||
+                league.equals(CHAMPIONS_LEAGUE) ||
+                league.equals(BUNDESLIGA)       ||
+                league.equals(PRIMERA_DIVISION)
+                ) {
+            return true;
+        }
+        return false;
     }
 }
