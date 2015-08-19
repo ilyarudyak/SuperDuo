@@ -7,5 +7,5 @@ package barqsoft.footballscores.api;
  */
 public class ApiKey {
 
-    public static final String KEY = "bc3ea73075124c10acf5b08adba55ca5";
+    public static final String KEY = "eea8fbd84aa84e2a9e1bcf324f993b05";
 }

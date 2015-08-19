@@ -9,6 +9,9 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     public static int selectedMatchId;
+
+    // we have 5 pages numbered from 0 to 4
+    // so today has position == 2
     public static final int CURRENT_FRAGMENT = 2;
 
     @Override

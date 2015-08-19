@@ -17,6 +17,7 @@ import barqsoft.footballscores.adapter.ScoresAdapter;
 import barqsoft.footballscores.adapter.ViewHolder;
 import barqsoft.footballscores.api.ScoresFetchService;
 import barqsoft.footballscores.data.ScoresContract;
+import barqsoft.footballscores.utils.MiscUtils;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -25,12 +26,30 @@ public class MainFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final int SCORES_LOADER = 0;
+    public static final String FRAGMENT_DATE = "fragment_date";
 
     private ScoresAdapter mAdapter;
     private String[] mDate = new String[1];
     private View rootView;
 
+    static MainFragment newInstance(int position) {
+        MainFragment mf = new MainFragment();
+        Bundle args = new Bundle();
+
+        args.putString(FRAGMENT_DATE, MiscUtils.getFragmentDate(position));
+        mf.setArguments(args);
+
+        return mf;
+    }
+
+
     public MainFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mDate[0] = getArguments().getString(FRAGMENT_DATE);
     }
 
     @Override
@@ -70,9 +89,6 @@ public class MainFragment extends Fragment
             }
         });
     }
-    public void setFragmentDate(String date) {
-        mDate[0] = date;
-    }
 
     // -----------------  loader callbacks -----------------
 
@@ -92,6 +108,4 @@ public class MainFragment extends Fragment
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
         mAdapter.swapCursor(null);
     }
-
-
 }

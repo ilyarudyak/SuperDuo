@@ -2,57 +2,47 @@ package barqsoft.footballscores;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v13.app.FragmentStatePagerAdapter;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import barqsoft.footballscores.utils.MiscUtils;
 
 /**
  * Created by yehya khaled on 2/27/2015.
  */
 public class PagerFragment extends Fragment {
 
+    // length of our time frame in days and
+    // number of pages in our view pager
     public static final int NUM_PAGES = 5;
-
-    public ViewPager mPagerHandler;
-    private ScoresPageAdapter mPagerAdapter;
-    private MainFragment[] mMainFragments = new MainFragment[5];
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.pager_fragment, container, false);
-        mPagerHandler = (ViewPager) rootView.findViewById(R.id.pager);
-        mPagerAdapter = new ScoresPageAdapter(getChildFragmentManager());
-        for (int i = 0; i < NUM_PAGES; i++) {
-            Date fragmentdate = new Date(System.currentTimeMillis() + ((i - 2) * 86400000));
-            SimpleDateFormat mformat = new SimpleDateFormat("yyyy-MM-dd");
-            mMainFragments[i] = new MainFragment();
-            mMainFragments[i].setFragmentDate(mformat.format(fragmentdate));
-        }
-        mPagerHandler.setAdapter(mPagerAdapter);
-        mPagerHandler.setCurrentItem(MainActivity.CURRENT_FRAGMENT);
+        View rootView = inflater.inflate(R.layout.fragment_pager, container, false);
+
+        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+        // we use nested fragments here with min API 17
+        viewPager.setAdapter(new ScoresPageAdapter(getChildFragmentManager()));
+        viewPager.setCurrentItem(MainActivity.CURRENT_FRAGMENT);
+
         return rootView;
     }
 
     /**
-     * We use here FragmentStatePagerAdapter, but probably the better choice
-     * would be FragmentPagerAdapter. From documentation: "This is best when
-     * navigating between sibling screens representing a fixed, small number
-     * of pages."
+     * We use here FragmentPagerAdapter instead of FragmentStatePagerAdapter.
+     * From documentation: "This is best when navigating between sibling
+     * screens representing a fixed, small number of pages."
      * */
-    private class ScoresPageAdapter extends FragmentStatePagerAdapter {
-        @Override
-        public Fragment getItem(int i) {
-            return mMainFragments[i];
+    private class ScoresPageAdapter extends FragmentPagerAdapter {
+
+        public ScoresPageAdapter(FragmentManager fm) {
+            super(fm);
         }
 
         @Override
@@ -60,37 +50,15 @@ public class PagerFragment extends Fragment {
             return NUM_PAGES;
         }
 
-        public ScoresPageAdapter(FragmentManager fm) {
-            super(fm);
+        @Override
+        public Fragment getItem(int position) {
+            return MainFragment.newInstance(position);
         }
 
-        // Returns the page title for the top indicator
         @Override
         public CharSequence getPageTitle(int position) {
-            return getDayName(getActivity(), System.currentTimeMillis() + ((position - 2) * 86400000));
+            return MiscUtils.getDayName(getActivity(), position);
         }
 
-        public String getDayName(Context context, long dateInMillis) {
-            // If the date is today, return the localized version of "Today" instead of the actual
-            // day name.
-
-            Time t = new Time();
-            t.setToNow();
-            int julianDay = Time.getJulianDay(dateInMillis, t.gmtoff);
-            int currentJulianDay = Time.getJulianDay(System.currentTimeMillis(), t.gmtoff);
-            if (julianDay == currentJulianDay) {
-                return context.getString(R.string.today);
-            } else if (julianDay == currentJulianDay + 1) {
-                return context.getString(R.string.tomorrow);
-            } else if (julianDay == currentJulianDay - 1) {
-                return context.getString(R.string.yesterday);
-            } else {
-                Time time = new Time();
-                time.setToNow();
-                // Otherwise, the format is just the day of the week (e.g "Wednesday".
-                SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
-                return dayFormat.format(dateInMillis);
-            }
-        }
     }
 }

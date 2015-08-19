@@ -47,8 +47,8 @@ public class ScoresFetchService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        getData2();
-//        getData(NEXT_2_DAYS);
+        getData(PAST_2_DAYS);
+        getData(NEXT_2_DAYS);
     }
 
     private void getData2() {
