@@ -21,11 +21,11 @@ public class JsonParser {
 
     // code for series: http://api.football-data.org/alpha/soccerseasons
     // they are NOT the same as in the previous year!
-    private static final String SERIE_A =               "401"; // Serie A 2015/16
-    private static final String PREMIER_LEAGUE =        "398"; // Premier League 2015/16
-    private static final String CHAMPIONS_LEAGUE =      "";    // n/a
-    private static final String PRIMERA_DIVISION =      "399"; // Primera Division 2015/16
-    private static final String BUNDESLIGA =            "394"; // Bundesliga 2015/16 - BL1
+    public static final String SERIE_A =               "401"; // Serie A 2015/16
+    public static final String PREMIER_LEAGUE =        "398"; // Premier League 2015/16
+    public static final String CHAMPIONS_LEAGUE =      "";    // n/a
+    public static final String PRIMERA_DIVISION =      "399"; // Primera Division 2015/16
+    public static final String BUNDESLIGA =            "394"; // Bundesliga 2015/16 - BL1
 
     private static final String SEASON_LINK =           "http://api.football-data.org/alpha/soccerseasons/";
     private static final String MATCH_LINK =            "http://api.football-data.org/alpha/fixtures/";

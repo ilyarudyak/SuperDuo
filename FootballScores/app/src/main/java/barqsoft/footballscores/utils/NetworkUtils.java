@@ -30,6 +30,7 @@ public class NetworkUtils {
      * @param c Context used to get the ConnectivityManager
      * @return
      */
+    // TODO add empty screen if network is nota available
     public static boolean isNetworkAvailable(Context c) {
         ConnectivityManager cm =
                 (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);

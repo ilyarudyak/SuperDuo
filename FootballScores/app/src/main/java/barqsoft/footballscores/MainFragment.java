@@ -60,7 +60,7 @@ public class MainFragment extends Fragment
 
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-        updateScores();
+//        updateScores();
         setAdapter();
 
         return rootView;

@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import barqsoft.footballscores.api.ScoresFetchService;
+
 public class MainActivity extends AppCompatActivity {
 
     public static int selectedMatchId;
@@ -43,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
             Intent start_about = new Intent(this, AboutActivity.class);
             startActivity(start_about);
             return true;
+        } else if (id == R.id.action_refresh) {
+            Intent serviceIntent = new Intent(this, ScoresFetchService.class);
+            startService(serviceIntent);
         }
 
         return super.onOptionsItemSelected(item);

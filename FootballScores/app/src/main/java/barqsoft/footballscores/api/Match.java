@@ -121,15 +121,15 @@ public class Match {
 
         ContentValues cv = new ContentValues();
 
-        cv.put(ScoresTable.MATCH_ID_COLUMN,     m.getMatchId());
-        cv.put(ScoresTable.DATE_COLUMN,         m.getDate());
-        cv.put(ScoresTable.TIME_COLUMN,         m.getTime());
-        cv.put(ScoresTable.HOME_COLUMN,         m.getHome());
-        cv.put(ScoresTable.AWAY_COLUMN,         m.getAway());
-        cv.put(ScoresTable.HOME_GOALS_COLUMN,   m.getHomeGoals());
-        cv.put(ScoresTable.AWAY_GOALS_COLUMN,   m.getAwayGoals());
-        cv.put(ScoresTable.LEAGUE_COLUMN,       m.getLeague());
-        cv.put(ScoresTable.MATCH_DAY_COLUMN,    m.getMatchDay());
+        cv.put(ScoresTable.LEAGUE_COLUMN,       m.getLeague());     // (1)
+        cv.put(ScoresTable.DATE_COLUMN,         m.getDate());       // (2)
+        cv.put(ScoresTable.TIME_COLUMN,         m.getTime());       // (3)
+        cv.put(ScoresTable.HOME_COLUMN,         m.getHome());       // (4)
+        cv.put(ScoresTable.AWAY_COLUMN,         m.getAway());       // (5)
+        cv.put(ScoresTable.HOME_GOALS_COLUMN,   m.getHomeGoals());  // (6)
+        cv.put(ScoresTable.AWAY_GOALS_COLUMN,   m.getAwayGoals());  // (7)
+        cv.put(ScoresTable.MATCH_ID_COLUMN,     m.getMatchId());    // (8)
+        cv.put(ScoresTable.MATCH_DAY_COLUMN,    m.getMatchDay());   // (9)
 
         return cv;
     }

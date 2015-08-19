@@ -9,36 +9,29 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import barqsoft.footballscores.R;
+import barqsoft.footballscores.api.JsonParser;
 
 /**
  * Created by yehya khaled on 3/3/2015.
  */
 public class MiscUtils {
-    public static final int SERIE_A = 357;
-    public static final int PREMIER_LEGAUE = 354;
-    public static final int CHAMPIONS_LEAGUE = 362;
-    public static final int PRIMERA_DIVISION = 358;
-    public static final int BUNDESLIGA = 351;
 
-    public static String getLeague(int league_num) {
-        switch (league_num) {
-            case SERIE_A:
-                return "Seria A";
-            case PREMIER_LEGAUE:
-                return "Premier League";
-            case CHAMPIONS_LEAGUE:
-                return "UEFA Champions League";
-            case PRIMERA_DIVISION:
-                return "Primera Division";
-            case BUNDESLIGA:
-                return "Bundesliga";
+    public static String getLeague(String leagueNum) {
+        switch (leagueNum) {
+            case JsonParser.SERIE_A:
+                return "Serie A 2015/16";
+            case JsonParser.PREMIER_LEAGUE:
+                return "Premier League 2015/16";
+            case JsonParser.PRIMERA_DIVISION:
+                return "Primera Division 2015/16";
+            case JsonParser.BUNDESLIGA:
+                return "Bundesliga 2015/16 - BL1";
             default:
-                return "Not known League Please report";
+                return "Not listed league";
         }
     }
-
-    public static String getMatchDay(int match_day, int league_num) {
-        if (league_num == CHAMPIONS_LEAGUE) {
+    public static String getMatchDay(int match_day, String leagueNum) {
+        if (leagueNum == JsonParser.CHAMPIONS_LEAGUE) {
             if (match_day <= 6) {
                 return "Group Stages, Matchday : 6";
             } else if (match_day == 7 || match_day == 8) {
@@ -54,7 +47,6 @@ public class MiscUtils {
             return "Matchday : " + String.valueOf(match_day);
         }
     }
-
     public static String getScores(int home_goals, int awaygoals) {
         if (home_goals < 0 || awaygoals < 0) {
             return " - ";
@@ -62,7 +54,6 @@ public class MiscUtils {
             return String.valueOf(home_goals) + " - " + String.valueOf(awaygoals);
         }
     }
-
     public static int getTeamCrestByTeamName(String teamname) {
         if (teamname == null) {
             return R.drawable.no_icon;
@@ -72,6 +63,12 @@ public class MiscUtils {
                 return R.drawable.arsenal;
             case "Manchester United FC":
                 return R.drawable.manchester_united;
+            case "Manchester City FC":
+                return R.drawable.manchester_city;
+            case "Liverpool FC":
+                return R.drawable.liverpool;
+            case "Chelsea FC":
+                return R.drawable.chelsea;
             case "Swansea City":
                 return R.drawable.swansea_city_afc;
             case "Leicester City":

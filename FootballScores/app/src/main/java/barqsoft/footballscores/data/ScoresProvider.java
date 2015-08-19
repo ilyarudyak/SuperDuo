@@ -28,7 +28,7 @@ public class ScoresProvider extends ContentProvider {
     private static final String SCORES_BY_ID =
             ScoresContract.ScoresTable.MATCH_ID_COLUMN + " = ?";
 
-    private static UriMatcher sUriMatcher = buildUriMatcher();
+    private static final UriMatcher sUriMatcher = buildUriMatcher();
     static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = ScoresContract.BASE_CONTENT_URI.toString();

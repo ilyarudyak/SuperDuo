@@ -7,6 +7,10 @@ import android.util.Log;
 
 import org.json.JSONException;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import barqsoft.footballscores.utils.DataUtils;
@@ -24,6 +28,9 @@ public class ScoresFetchService extends IntentService {
     public static final String PAST_2_DAYS = "p2";
     public static final String NEXT_2_DAYS = "n2";
 
+    // if true we use test data instead of data from API
+    private boolean isTestData = true;
+
     public ScoresFetchService() {
         super("ScoresFetchService");
     }
@@ -31,10 +38,15 @@ public class ScoresFetchService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        getData(PAST_2_DAYS);
-        getData(NEXT_2_DAYS);
+        if (isTestData) {
+            getTestData();
+        } else {
+            getData(PAST_2_DAYS);
+            getData(NEXT_2_DAYS);
+        }
     }
 
+    // helper methods
     private void getData(String timeFrame) {
         String jsonStr = NetworkUtils.getScoresJsonFromNetwork(timeFrame);
         if (jsonStr != null) {
@@ -46,6 +58,34 @@ public class ScoresFetchService extends IntentService {
                 Log.d(TAG, "Can not parse JSON: ", e);
             }
         }
+    }
+    private void getTestData() {
+
+        try {
+            String jsonStr = readFile("test_scores.json");
+
+            List<Match> matchList = JsonParser.parseScoresJsonStr(jsonStr, true);
+            Log.d(TAG, matchList.get(0).toString());
+            ContentValues[] values = Match.buildContentValues(matchList);
+            DataUtils.insertMatches(getApplicationContext(), values);
+        } catch (IOException e) {
+            Log.d(TAG, "Can not read file: ", e);
+        } catch (JSONException e) {
+            Log.d(TAG, "Can not parse JSON: ", e);
+        }
+
+    }
+    private String readFile(String filename) throws IOException {
+        InputStream inputStream = getApplicationContext()
+                .getAssets().open(filename);
+        StringBuilder sb = new StringBuilder();
+        String line;
+        BufferedReader br = new BufferedReader(
+                new InputStreamReader(inputStream));
+        while ((line = br.readLine()) != null) {
+            sb.append(line.trim());
+        }
+        return sb.toString();
     }
 
 }
