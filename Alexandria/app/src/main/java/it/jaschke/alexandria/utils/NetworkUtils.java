@@ -103,5 +103,5 @@ public class NetworkUtils {
             return null;
         }
 
-    } // end of getBookFromNetwork()
+    }
 }

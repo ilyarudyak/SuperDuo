@@ -1,0 +1,607 @@
+{
+  "timeFrameStart": "2015-08-16",
+  "timeFrameEnd": "2015-08-18",
+  "count": 24,
+  "fixtures": [
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/149243"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/404"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/674"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/677"
+        }
+      },
+      "date": "2015-08-16T10:30:00Z",
+      "status": "FINISHED",
+      "matchday": 2,
+      "homeTeamName": "PSV Eindhoven",
+      "awayTeamName": "FC Groningen",
+      "result": {
+        "goalsHomeTeam": 2,
+        "goalsAwayTeam": 0
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/145958"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/395"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/20"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/21"
+        }
+      },
+      "date": "2015-08-16T11:30:00Z",
+      "status": "FINISHED",
+      "matchday": 3,
+      "homeTeamName": "FC St. Pauli",
+      "awayTeamName": "SpVgg Greuther Fürth",
+      "result": {
+        "goalsHomeTeam": 3,
+        "goalsAwayTeam": 2
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/145955"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/395"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/25"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/38"
+        }
+      },
+      "date": "2015-08-16T11:30:00Z",
+      "status": "FINISHED",
+      "matchday": 3,
+      "homeTeamName": "MSV Duisburg",
+      "awayTeamName": "Arminia Bielefeld",
+      "result": {
+        "goalsHomeTeam": 2,
+        "goalsAwayTeam": 2
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/145959"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/395"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/28"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/13"
+        }
+      },
+      "date": "2015-08-16T11:30:00Z",
+      "status": "FINISHED",
+      "matchday": 3,
+      "homeTeamName": "1. FC Union Berlin",
+      "awayTeamName": "1. FC Kaiserslautern",
+      "result": {
+        "goalsHomeTeam": 2,
+        "goalsAwayTeam": 2
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/146344"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/396"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/547"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/516"
+        }
+      },
+      "date": "2015-08-16T12:00:00Z",
+      "status": "FINISHED",
+      "matchday": 2,
+      "homeTeamName": "Stade de Reims",
+      "awayTeamName": "Olympique de Marseille",
+      "result": {
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 0
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/148975"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/403"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/1054"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/554"
+        }
+      },
+      "date": "2015-08-16T12:00:00Z",
+      "status": "FINISHED",
+      "matchday": 3,
+      "homeTeamName": "Magdeburg",
+      "awayTeamName": "Hallescher FC",
+      "result": {
+        "goalsHomeTeam": 2,
+        "goalsAwayTeam": 1
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/147063"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/398"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/354"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/57"
+        }
+      },
+      "date": "2015-08-16T12:30:00Z",
+      "status": "FINISHED",
+      "matchday": 2,
+      "homeTeamName": "Crystal Palace FC",
+      "awayTeamName": "Arsenal FC",
+      "result": {
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 2
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/149241"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/404"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/717"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/675"
+        }
+      },
+      "date": "2015-08-16T12:30:00Z",
+      "status": "FINISHED",
+      "matchday": 2,
+      "homeTeamName": "SC Cambuur-Leeuwarden",
+      "awayTeamName": "Feyenoord Rotterdam",
+      "result": {
+        "goalsHomeTeam": 0,
+        "goalsAwayTeam": 2
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/149242"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/404"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/676"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/673"
+        }
+      },
+      "date": "2015-08-16T12:30:00Z",
+      "status": "FINISHED",
+      "matchday": 2,
+      "homeTeamName": "FC Utrecht",
+      "awayTeamName": "SC Heerenveen",
+      "result": {
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 1
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/145670"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/394"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/11"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/19"
+        }
+      },
+      "date": "2015-08-16T13:30:00Z",
+      "status": "FINISHED",
+      "matchday": 1,
+      "homeTeamName": "VfL Wolfsburg",
+      "awayTeamName": "Eintracht Frankfurt",
+      "result": {
+        "goalsHomeTeam": 2,
+        "goalsAwayTeam": 1
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/149240"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/404"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/671"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/667"
+        }
+      },
+      "date": "2015-08-16T14:45:00Z",
+      "status": "FINISHED",
+      "matchday": 2,
+      "homeTeamName": "Heracles Almelo",
+      "awayTeamName": "NEC Nijmegen",
+      "result": {
+        "goalsHomeTeam": 3,
+        "goalsAwayTeam": 0
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/146341"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/396"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/525"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/536"
+        }
+      },
+      "date": "2015-08-16T15:00:00Z",
+      "status": "FINISHED",
+      "matchday": 2,
+      "homeTeamName": "FC Lorient",
+      "awayTeamName": "SC Bastia",
+      "result": {
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 1
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/147064"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/398"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/65"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/61"
+        }
+      },
+      "date": "2015-08-16T15:00:00Z",
+      "status": "FINISHED",
+      "matchday": 2,
+      "homeTeamName": "Manchester City FC",
+      "awayTeamName": "Chelsea FC",
+      "result": {
+        "goalsHomeTeam": 3,
+        "goalsAwayTeam": 0
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/148535"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/402"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/506"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/810"
+        }
+      },
+      "date": "2015-08-16T15:00:00Z",
+      "status": "FINISHED",
+      "matchday": 1,
+      "homeTeamName": "Vitoria Setubal",
+      "awayTeamName": "Boavista Porto FC",
+      "result": {
+        "goalsHomeTeam": 2,
+        "goalsAwayTeam": 2
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/148603"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/402"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/1052"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/504"
+        }
+      },
+      "date": "2015-08-16T15:00:00Z",
+      "status": "FINISHED",
+      "matchday": 1,
+      "homeTeamName": "Uni&atilde;o Madeira",
+      "awayTeamName": "Maritimo Funchal",
+      "result": {
+        "goalsHomeTeam": 2,
+        "goalsAwayTeam": 1
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/145668"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/394"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/10"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/1"
+        }
+      },
+      "date": "2015-08-16T15:30:00Z",
+      "status": "FINISHED",
+      "matchday": 1,
+      "homeTeamName": "VfB Stuttgart",
+      "awayTeamName": "1. FC Köln",
+      "result": {
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 3
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/148534"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/402"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/583"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/712"
+        }
+      },
+      "date": "2015-08-16T16:00:00Z",
+      "status": "FINISHED",
+      "matchday": 1,
+      "homeTeamName": "Moreirense FC",
+      "awayTeamName": "FC Arouca",
+      "result": {
+        "goalsHomeTeam": 0,
+        "goalsAwayTeam": 2
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/148533"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/402"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/497"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/501"
+        }
+      },
+      "date": "2015-08-16T17:15:00Z",
+      "status": "FINISHED",
+      "matchday": 1,
+      "homeTeamName": "Sporting Braga",
+      "awayTeamName": "Nacional Funchal",
+      "result": {
+        "goalsHomeTeam": 2,
+        "goalsAwayTeam": 1
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/146343"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/396"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/524"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/555"
+        }
+      },
+      "date": "2015-08-16T19:00:00Z",
+      "status": "FINISHED",
+      "matchday": 2,
+      "homeTeamName": "Paris Saint-Germain",
+      "awayTeamName": "Gazélec Ajaccio",
+      "result": {
+        "goalsHomeTeam": 2,
+        "goalsAwayTeam": 0
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/148532"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/402"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/495"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/582"
+        }
+      },
+      "date": "2015-08-16T19:30:00Z",
+      "status": "FINISHED",
+      "matchday": 1,
+      "homeTeamName": "Benfica Lissabon",
+      "awayTeamName": "GD Estoril Praia",
+      "result": {
+        "goalsHomeTeam": 4,
+        "goalsAwayTeam": 0
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/145956"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/395"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/14"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/26"
+        }
+      },
+      "date": "2015-08-17T18:15:00Z",
+      "status": "FINISHED",
+      "matchday": 3,
+      "homeTeamName": "1. FC Nürnberg",
+      "awayTeamName": "TSV 1860 München",
+      "result": {
+        "goalsHomeTeam": 2,
+        "goalsAwayTeam": 2
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/146713"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/397"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/545"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/515"
+        }
+      },
+      "date": "2015-08-17T18:30:00Z",
+      "status": "FINISHED",
+      "matchday": 3,
+      "homeTeamName": "FC Metz",
+      "awayTeamName": "Valenciennes",
+      "result": {
+        "goalsHomeTeam": 2,
+        "goalsAwayTeam": 0
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/147116"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/398"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/64"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/1044"
+        }
+      },
+      "date": "2015-08-17T19:00:00Z",
+      "status": "FINISHED",
+      "matchday": 2,
+      "homeTeamName": "Liverpool FC",
+      "awayTeamName": "AFC Bournemouth",
+      "result": {
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 0
+      }
+    },
+    {
+      "_links": {
+        "self": {
+          "href": "http://api.football-data.org/alpha/fixtures/148531"
+        },
+        "soccerseason": {
+          "href": "http://api.football-data.org/alpha/soccerseasons/402"
+        },
+        "homeTeam": {
+          "href": "http://api.football-data.org/alpha/teams/507"
+        },
+        "awayTeam": {
+          "href": "http://api.football-data.org/alpha/teams/509"
+        }
+      },
+      "date": "2015-08-17T19:00:00Z",
+      "status": "FINISHED",
+      "matchday": 1,
+      "homeTeamName": "FC Paços de Ferreira",
+      "awayTeamName": "Académica de Coimbra",
+      "result": {
+        "goalsHomeTeam": 1,
+        "goalsAwayTeam": 0
+      }
+    }
+  ]
+}

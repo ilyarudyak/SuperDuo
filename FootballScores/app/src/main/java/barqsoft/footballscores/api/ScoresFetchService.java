@@ -34,15 +34,16 @@ public class ScoresFetchService extends IntentService {
 
     // see here: http://api.football-data.org/documentation
     // filter for timeFrame for past or next 2 days
-    private static final String PAST_2_DAYS = "p2";
-    private static final String NEXT_2_DAYS = "n2";
+    public static final String PAST_2_DAYS = "p2";
+    public static final String NEXT_2_DAYS = "n2";
 
     public ScoresFetchService() {
-        super("myFetchService");
+        super("ScoresFetchService");
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        
         getData(PAST_2_DAYS);
         getData(NEXT_2_DAYS);
     }
@@ -126,11 +127,11 @@ public class ScoresFetchService extends IntentService {
     private void processJsonData(String JSONdata,
                                  Context mContext, boolean isReal) {
         //JSON data
-        final String SERIE_A = "357";
-        final String PREMIER_LEGAUE = "354";
-        final String CHAMPIONS_LEAGUE = "362";
-        final String PRIMERA_DIVISION = "358";
-        final String BUNDESLIGA = "351";
+        final String SERIE_A = "401";
+        final String PREMIER_LEGAUE = "398";
+        final String CHAMPIONS_LEAGUE = "";
+        final String PRIMERA_DIVISION = "399";
+        final String BUNDESLIGA = "394";
         final String SEASON_LINK = "http://api.football-data.org/alpha/soccerseasons/";
         final String MATCH_LINK = "http://api.football-data.org/alpha/fixtures/";
         final String FIXTURES = "fixtures";
@@ -172,7 +173,7 @@ public class ScoresFetchService extends IntentService {
                         League.equals(SERIE_A) ||
                         League.equals(CHAMPIONS_LEAGUE) ||
                         League.equals(BUNDESLIGA) ||
-                        League.equals(PRIMERA_DIVISION)) {
+                        League.equals(PRIMERA_DIVISION) || true) {
                     match_id = match_data.getJSONObject(LINKS).getJSONObject(SELF).
                             getString("href");
                     match_id = match_id.replace(MATCH_LINK, "");
@@ -209,27 +210,19 @@ public class ScoresFetchService extends IntentService {
                     Home_goals = match_data.getJSONObject(RESULT).getString(HOME_GOALS);
                     Away_goals = match_data.getJSONObject(RESULT).getString(AWAY_GOALS);
                     match_day = match_data.getString(MATCH_DAY);
-                    ContentValues match_values = new ContentValues();
-                    match_values.put(ScoresContract.ScoresTable.MATCH_ID_COLUMN, match_id);
-                    match_values.put(ScoresContract.ScoresTable.DATE_COLUMN, mDate);
-                    match_values.put(ScoresContract.ScoresTable.TIME_COLUMN, mTime);
-                    match_values.put(ScoresContract.ScoresTable.HOME_COLUMN, Home);
-                    match_values.put(ScoresContract.ScoresTable.AWAY_COLUMN, Away);
-                    match_values.put(ScoresContract.ScoresTable.HOME_GOALS_COLUMN, Home_goals);
-                    match_values.put(ScoresContract.ScoresTable.AWAY_GOALS_COLUMN, Away_goals);
-                    match_values.put(ScoresContract.ScoresTable.LEAGUE_COLUMN, League);
-                    match_values.put(ScoresContract.ScoresTable.MATCH_DAY_COLUMN, match_day);
-                    //log spam
 
-                    //Log.v(LOG_TAG,matchId);
-                    //Log.v(LOG_TAG,mDate);
-                    //Log.v(LOG_TAG,mTime);
-                    //Log.v(LOG_TAG,Home);
-                    //Log.v(LOG_TAG,Away);
-                    //Log.v(LOG_TAG,Home_goals);
-                    //Log.v(LOG_TAG,Away_goals);
+                    ContentValues cv = new ContentValues();
+                    cv.put(ScoresContract.ScoresTable.MATCH_ID_COLUMN, match_id);
+                    cv.put(ScoresContract.ScoresTable.DATE_COLUMN, mDate);
+                    cv.put(ScoresContract.ScoresTable.TIME_COLUMN, mTime);
+                    cv.put(ScoresContract.ScoresTable.HOME_COLUMN, Home);
+                    cv.put(ScoresContract.ScoresTable.AWAY_COLUMN, Away);
+                    cv.put(ScoresContract.ScoresTable.HOME_GOALS_COLUMN, Home_goals);
+                    cv.put(ScoresContract.ScoresTable.AWAY_GOALS_COLUMN, Away_goals);
+                    cv.put(ScoresContract.ScoresTable.LEAGUE_COLUMN, League);
+                    cv.put(ScoresContract.ScoresTable.MATCH_DAY_COLUMN, match_day);
 
-                    values.add(match_values);
+                    values.add(cv);
                 }
             }
             int inserted_data = 0;

@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import barqsoft.footballscores.R;
-import barqsoft.footballscores.utils.Utils;
+import barqsoft.footballscores.utils.MiscUtils;
 
 /**
  * Created by yehya khaled on 2/26/2015.
@@ -51,11 +51,11 @@ public class ScoresAdapter extends CursorAdapter
         mHolder.homeName.setText(cursor.getString(COL_HOME));
         mHolder.awayName.setText(cursor.getString(COL_AWAY));
         mHolder.date.setText(cursor.getString(COL_MATCHTIME));
-        mHolder.score.setText(Utils.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
+        mHolder.score.setText(MiscUtils.getScores(cursor.getInt(COL_HOME_GOALS), cursor.getInt(COL_AWAY_GOALS)));
         mHolder.matchId = cursor.getDouble(COL_ID);
-        mHolder.homeCrest.setImageResource(Utils.getTeamCrestByTeamName(
+        mHolder.homeCrest.setImageResource(MiscUtils.getTeamCrestByTeamName(
                 cursor.getString(COL_HOME)));
-        mHolder.awayCrest.setImageResource(Utils.getTeamCrestByTeamName(
+        mHolder.awayCrest.setImageResource(MiscUtils.getTeamCrestByTeamName(
                 cursor.getString(COL_AWAY)
         ));
         //Log.v(FetchScoreTask.LOG_TAG,mHolder.homeName.getText() + " Vs. " + mHolder.awayName.getText() +" id " + String.valueOf(mHolder.matchId));
@@ -71,10 +71,10 @@ public class ScoresAdapter extends CursorAdapter
             container.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                     , ViewGroup.LayoutParams.MATCH_PARENT));
             TextView match_day = (TextView) v.findViewById(R.id.matchday_textview);
-            match_day.setText(Utils.getMatchDay(cursor.getInt(COL_MATCHDAY),
+            match_day.setText(MiscUtils.getMatchDay(cursor.getInt(COL_MATCHDAY),
                     cursor.getInt(COL_LEAGUE)));
             TextView league = (TextView) v.findViewById(R.id.league_textview);
-            league.setText(Utils.getLeague(cursor.getInt(COL_LEAGUE)));
+            league.setText(MiscUtils.getLeague(cursor.getInt(COL_LEAGUE)));
             Button share_button = (Button) v.findViewById(R.id.share_button);
             share_button.setOnClickListener(new View.OnClickListener() {
                 @Override
