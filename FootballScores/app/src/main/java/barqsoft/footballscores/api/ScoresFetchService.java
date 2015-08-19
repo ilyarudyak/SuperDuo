@@ -19,11 +19,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.Vector;
 
-import barqsoft.footballscores.data.ScoresContract;
 import barqsoft.footballscores.R;
+import barqsoft.footballscores.data.ScoresContract;
+import barqsoft.footballscores.utils.DataUtils;
+import barqsoft.footballscores.utils.NetworkUtils;
 
 /**
  * Created by yehya khaled on 3/2/2015.
@@ -43,9 +46,22 @@ public class ScoresFetchService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        
-        getData(PAST_2_DAYS);
-        getData(NEXT_2_DAYS);
+
+        getData2();
+//        getData(NEXT_2_DAYS);
+    }
+
+    private void getData2() {
+        String jsonStr = NetworkUtils.getScoresJsonFromNetwork(PAST_2_DAYS);
+        try {
+            List<Match> matchList = JsonParser.parseScoresJsonStr(jsonStr);
+            ContentValues[] values = Match.buildContentValues(matchList);
+            DataUtils.insertMatches(getApplicationContext(), values);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     private void getData(String timeFrame) {

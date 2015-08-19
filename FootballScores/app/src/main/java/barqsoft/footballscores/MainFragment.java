@@ -1,12 +1,12 @@
 package barqsoft.footballscores;
 
+import android.app.Fragment;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +15,8 @@ import android.widget.ListView;
 
 import barqsoft.footballscores.adapter.ScoresAdapter;
 import barqsoft.footballscores.adapter.ViewHolder;
-import barqsoft.footballscores.data.ScoresContract;
 import barqsoft.footballscores.api.ScoresFetchService;
+import barqsoft.footballscores.data.ScoresContract;
 
 /**
  * A placeholder fragment containing a simple view.

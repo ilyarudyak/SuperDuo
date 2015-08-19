@@ -1,10 +1,10 @@
 package barqsoft.footballscores;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.format.Time;
 import android.view.LayoutInflater;
@@ -43,6 +43,12 @@ public class PagerFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * We use here FragmentStatePagerAdapter, but probably the better choice
+     * would be FragmentPagerAdapter. From documentation: "This is best when
+     * navigating between sibling screens representing a fixed, small number
+     * of pages."
+     * */
     private class ScoresPageAdapter extends FragmentStatePagerAdapter {
         @Override
         public Fragment getItem(int i) {
