@@ -3,6 +3,7 @@ package barqsoft.footballscores.utils;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -37,9 +38,11 @@ public class DataUtils {
         Calendar calendar = new GregorianCalendar();
         Date date = calendar.getTime();
         String dateStr = MiscUtils.formatDate(date);
+        Log.d(TAG, dateStr);
 
         // where condition date=dateStr
-        String selection = ScoresContract.ScoresTable.DATE_COLUMN + "=" + dateStr;
+        String selection = ScoresContract.ScoresTable.DATE_COLUMN + "=" + "'" + dateStr + "'";
+        Log.d(TAG, selection);
 
         Cursor cursor = context.getContentResolver().query(
                 ScoresContract.BASE_CONTENT_URI, null, selection, null, null);

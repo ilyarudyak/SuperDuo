@@ -15,10 +15,10 @@ public class TestDataUtils extends AndroidTestCase {
 
     private static final String TAG = TestDataUtils.class.getSimpleName();
 
-    public void testGetScoresJsonFromNetwork() throws Throwable {
+    public void testGetMatchesToday() throws Throwable {
 
         List<Match> matches = DataUtils.getMatchesToday(mContext);
-        Log.d(TAG, matches.get(0).toString());
+        Log.d(TAG, matches.toString());
     }
 }
 

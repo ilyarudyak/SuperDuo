@@ -94,7 +94,7 @@ public class ScoresProvider extends ContentProvider {
             case MATCHES:
                 retCursor = sOpenHelper.getReadableDatabase().query(
                         ScoresContract.ScoresTable.TABLE_NAME,
-                        projection, null, null, null, null, sortOrder);
+                        projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case MATCHES_WITH_DATE:
                 //Log.v(FetchScoreTask.TAG,selectionArgs[1]);
