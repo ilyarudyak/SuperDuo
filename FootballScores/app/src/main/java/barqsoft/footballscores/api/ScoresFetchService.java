@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import barqsoft.footballscores.utils.ApiUtils;
 import barqsoft.footballscores.utils.DataUtils;
 import barqsoft.footballscores.utils.NetworkUtils;
 
@@ -28,8 +29,11 @@ public class ScoresFetchService extends IntentService {
     public static final String PAST_2_DAYS = "p2";
     public static final String NEXT_2_DAYS = "n2";
 
+    // debugging options
     // if true we use test data instead of data from API
-    private boolean isTestData = true;
+    private static final boolean IS_TEST_DATA_FROM_FILE = false;
+    private static final boolean IS_TEST_DATA_GENERATED = true;
+    private static final boolean IS_ALL_LEAGUES = true;
 
     public ScoresFetchService() {
         super("ScoresFetchService");
@@ -38,8 +42,10 @@ public class ScoresFetchService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        if (isTestData) {
-            getTestData();
+        if (IS_TEST_DATA_FROM_FILE) {
+            getTestDataFromFile();
+        } else if (IS_TEST_DATA_GENERATED) {
+            generateTestData();
         } else {
             getData(PAST_2_DAYS);
             getData(NEXT_2_DAYS);
@@ -59,13 +65,13 @@ public class ScoresFetchService extends IntentService {
             }
         }
     }
-    private void getTestData() {
+    private void getTestDataFromFile() {
 
         try {
             String jsonStr = readFile("test_scores.json");
 
-            List<Match> matchList = JsonParser.parseScoresJsonStr(jsonStr, true);
-            Log.d(TAG, matchList.get(0).toString());
+            List<Match> matchList = JsonParser.parseScoresJsonStr(jsonStr, IS_ALL_LEAGUES);
+//            Log.d(TAG, matchList.get(0).toString());
             ContentValues[] values = Match.buildContentValues(matchList);
             DataUtils.insertMatches(getApplicationContext(), values);
         } catch (IOException e) {
@@ -73,6 +79,15 @@ public class ScoresFetchService extends IntentService {
         } catch (JSONException e) {
             Log.d(TAG, "Can not parse JSON: ", e);
         }
+
+    }
+    private void generateTestData() {
+
+        List<Match> matchList = ApiUtils.generateTestData();
+        Log.d(TAG, matchList.get(0).toString());
+        ContentValues[] values = Match.buildContentValues(matchList);
+        DataUtils.insertMatches(getApplicationContext(), values);
+
 
     }
     private String readFile(String filename) throws IOException {
