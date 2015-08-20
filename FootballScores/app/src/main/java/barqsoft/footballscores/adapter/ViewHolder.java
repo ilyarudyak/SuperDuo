@@ -22,8 +22,8 @@ public class ViewHolder {
     public ViewHolder(View view) {
         homeName = (TextView) view.findViewById(R.id.home_name);
         awayName = (TextView) view.findViewById(R.id.away_name);
-        score = (TextView) view.findViewById(R.id.score_textview);
-        date = (TextView) view.findViewById(R.id.data_textview);
+        score = (TextView) view.findViewById(R.id.score_text_view);
+        date = (TextView) view.findViewById(R.id.time_text_view);
         homeCrest = (ImageView) view.findViewById(R.id.home_crest);
         awayCrest = (ImageView) view.findViewById(R.id.away_crest);
     }
