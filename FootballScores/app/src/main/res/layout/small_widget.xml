@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:elevation="4dp"
     android:background="@color/primary"
+    android:id="@+id/small_widget"
     >
     <LinearLayout
         android:orientation="horizontal" android:layout_width="match_parent"
