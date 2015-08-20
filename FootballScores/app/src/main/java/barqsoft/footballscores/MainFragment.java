@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import barqsoft.footballscores.utils.MiscUtils;
  */
 public class MainFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    public static final String TAG = MainFragment.class.getSimpleName();
 
     public static final int SCORES_LOADER = 0;
     public static final String FRAGMENT_DATE = "fragment_date";
@@ -49,6 +52,7 @@ public class MainFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDate[0] = getArguments().getString(FRAGMENT_DATE);
+        Log.d(TAG, mDate[0]);
     }
 
     @Override

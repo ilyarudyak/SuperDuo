@@ -115,11 +115,11 @@ public class MiscUtils {
             case 3:
                 return context.getString(R.string.tomorrow);
             case 4:
-                calendar.add(Calendar.DAY_OF_MONTH, 4);
+                calendar.add(Calendar.DAY_OF_MONTH, 2);
                 date = calendar.getTime();
                 return sdf.format(date);
             default:
-                throw new IllegalArgumentException("wrong position");
+                throw new IllegalArgumentException("wrong position: " + position);
         }
     }
 
@@ -132,7 +132,7 @@ public class MiscUtils {
 
         Calendar calendar = new GregorianCalendar();
 
-        // "EEEE" gets us the full name of a day
+        // "yyyy-MM-dd" gets us date like 2015-08-20
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
         switch (position) {
@@ -141,11 +141,10 @@ public class MiscUtils {
                 Date date = calendar.getTime();
                 return sdf.format(date);
             case 1:
-                calendar.add(Calendar.DAY_OF_MONTH, 1);
+                calendar.add(Calendar.DAY_OF_MONTH, -1);
                 date = calendar.getTime();
                 return sdf.format(date);
             case 2:
-                calendar.add(Calendar.DAY_OF_MONTH, 1);
                 date = calendar.getTime();
                 return sdf.format(date);
             case 3:
@@ -153,11 +152,11 @@ public class MiscUtils {
                 date = calendar.getTime();
                 return sdf.format(date);
             case 4:
-                calendar.add(Calendar.DAY_OF_MONTH, 1);
+                calendar.add(Calendar.DAY_OF_MONTH, 2);
                 date = calendar.getTime();
                 return sdf.format(date);
             default:
-                throw new IllegalArgumentException("wrong position");
+                throw new IllegalArgumentException("wrong position: " + position);
         }
     }
 }
