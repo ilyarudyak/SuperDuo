@@ -3,7 +3,6 @@ package barqsoft.footballscores;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.widget.ListView;
 
 import barqsoft.footballscores.adapter.ScoresAdapter;
 import barqsoft.footballscores.adapter.ViewHolder;
-import barqsoft.footballscores.api.ScoresFetchService;
 import barqsoft.footballscores.data.ScoresContract;
 import barqsoft.footballscores.utils.MiscUtils;
 
@@ -70,11 +68,6 @@ public class MainFragment extends Fragment
         return rootView;
     }
 
-    // start service to get scores
-    private void updateScores() {
-        Intent serviceIntent = new Intent(getActivity(), ScoresFetchService.class);
-        getActivity().startService(serviceIntent);
-    }
     private void setAdapter () {
 
         mAdapter = new ScoresAdapter(getActivity(), null, 0);

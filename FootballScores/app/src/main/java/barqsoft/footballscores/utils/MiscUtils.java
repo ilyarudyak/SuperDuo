@@ -54,11 +54,11 @@ public class MiscUtils {
             return String.valueOf(home_goals) + " - " + String.valueOf(awaygoals);
         }
     }
-    public static int getTeamCrestByTeamName(String teamname) {
-        if (teamname == null) {
+    public static int getTeamCrestByTeamName(String teamName) {
+        if (teamName == null) {
             return R.drawable.no_icon;
         }
-        switch (teamname) {
+        switch (teamName) {
             case "Arsenal London FC":
                 return R.drawable.arsenal;
             case "Manchester United FC":
