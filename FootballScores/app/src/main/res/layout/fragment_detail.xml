@@ -11,19 +11,19 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_weight="1"
-            android:text="@string/test_text"
+            android:text="@string/premier_league"
             android:textColor="@android:color/black"
             android:textSize="@dimen/League"
-            android:id="@+id/league_textview"/>
+            android:id="@+id/league_text_view"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_weight="1"
-            android:text="@string/test_text"
+            android:text="@string/match_day_text"
             android:textSize="@dimen/League"
             android:textColor="@android:color/black"
-            android:id="@+id/matchday_textview"/>
+            android:id="@+id/match_day_text_view"/>
     </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
@@ -36,11 +36,12 @@
             android:minWidth="88dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/share_text"
+            android:text="@string/action_share"
             android:id="@+id/share_button"
             android:drawableLeft="@android:drawable/ic_menu_share"
             android:background="@color/primary_dark"
             android:textColor="@color/white"
+            android:contentDescription="@string/action_share"
         />
     </FrameLayout>
 

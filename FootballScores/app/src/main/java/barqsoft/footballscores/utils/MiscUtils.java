@@ -16,16 +16,16 @@ import barqsoft.footballscores.api.JsonParser;
  */
 public class MiscUtils {
 
-    public static String getLeague(String leagueNum) {
+    public static String getLeague(Context context, String leagueNum) {
         switch (leagueNum) {
             case JsonParser.SERIE_A:
-                return "Serie A 2015/16";
+                return context.getString(R.string.serie_a);
             case JsonParser.PREMIER_LEAGUE:
-                return "Premier League 2015/16";
+                return context.getString(R.string.premier_league);
             case JsonParser.PRIMERA_DIVISION:
-                return "Primera Division 2015/16";
+                return context.getString(R.string.primera_divison);
             case JsonParser.BUNDESLIGA:
-                return "Bundesliga 2015/16 - BL1";
+                return context.getString(R.string.bundesliga);
             default:
                 return "Not listed league";
         }
@@ -179,4 +179,7 @@ public class MiscUtils {
 
         return sdf.format(date);
     }
+
+
+
 }
