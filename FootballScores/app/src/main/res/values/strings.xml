@@ -37,6 +37,7 @@
     <!-- A11y -->
     <string name="a11y_home_team_crest">Home team crest: <xliff:g id="team">%1$s</xliff:g></string>
     <string name="a11y_away_team_crest">Away team crest: <xliff:g id="team">%1$s</xliff:g></string>
+    <string name="a11y_share_button">Share button</string>
 
     <!-- Command titles -->
     <string name="arsenal">Arsenal London FC</string>
