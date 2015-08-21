@@ -13,6 +13,6 @@ public class SmallWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context,
                          AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        context.startService(new Intent(context, SmallWidgetIntentService.class));
+        context.startService(new Intent(context, SmallWidgetService.class));
     }
 }

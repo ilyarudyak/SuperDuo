@@ -46,7 +46,7 @@
         </receiver>
 
         <service
-            android:name=".widget.SmallWidgetIntentService"
+            android:name=".widget.SmallWidgetService"
             android:exported="false" >
         </service>
     </application>
