@@ -20,9 +20,9 @@ import barqsoft.footballscores.utils.NetworkUtils;
 /**
  * Created by yehya khaled on 3/2/2015.
  */
-public class ScoresFetchService extends IntentService {
+public class ScoresService extends IntentService {
 
-    public static final String TAG = ScoresFetchService.class.getSimpleName();
+    public static final String TAG = ScoresService.class.getSimpleName();
 
     // see here: http://api.football-data.org/documentation
     // filter for timeFrame for past or next 2 days
@@ -35,7 +35,7 @@ public class ScoresFetchService extends IntentService {
     private static final boolean IS_TEST_DATA_GENERATED = true;
     private static final boolean IS_ALL_LEAGUES = true;
 
-    public ScoresFetchService() {
+    public ScoresService() {
         super("ScoresFetchService");
     }
 

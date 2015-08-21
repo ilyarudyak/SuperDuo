@@ -108,4 +108,6 @@ public class ScoresAdapter extends CursorAdapter {
         return shareIntent;
     }
 
+
+
 }

@@ -3,7 +3,7 @@ package barqsoft.footballscores;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
-import barqsoft.footballscores.api.ScoresFetchService;
+import barqsoft.footballscores.api.ScoresService;
 import barqsoft.footballscores.utils.NetworkUtils;
 
 /**
@@ -16,7 +16,7 @@ public class TestNetworkUtils extends AndroidTestCase {
     public void testGetScoresJsonFromNetwork() throws Throwable {
 
         String jsonStr = NetworkUtils.getScoresJsonFromNetwork(
-                ScoresFetchService.PAST_2_DAYS);
+                ScoresService.PAST_2_DAYS);
         Log.d(TAG, jsonStr.substring(0, 25));
     }
 }

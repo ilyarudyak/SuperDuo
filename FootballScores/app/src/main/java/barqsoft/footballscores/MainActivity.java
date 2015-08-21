@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import barqsoft.footballscores.api.ScoresFetchService;
+import barqsoft.footballscores.api.BootReceiver;
+import barqsoft.footballscores.api.ScoresService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
                     .add(android.R.id.content, new PagerFragment())
                     .commit();
         }
+
+        // start service to get data from API
+        BootReceiver.scheduleAlarms(this);
     }
 
 
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(start_about);
             return true;
         } else if (id == R.id.action_refresh) {
-            Intent serviceIntent = new Intent(this, ScoresFetchService.class);
+            Intent serviceIntent = new Intent(this, ScoresService.class);
             startService(serviceIntent);
         }
 
