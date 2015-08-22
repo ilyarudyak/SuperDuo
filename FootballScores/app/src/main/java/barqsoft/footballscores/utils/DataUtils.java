@@ -34,13 +34,13 @@ public class DataUtils {
      * */
     public static List<Match> getMatchesToday(Context context) {
 
-        // get Today's date string
+        // get Today's time string
         Calendar calendar = new GregorianCalendar();
         Date date = calendar.getTime();
         String dateStr = MiscUtils.formatDate(date);
         Log.d(TAG, dateStr);
 
-        // where condition date=dateStr
+        // where condition time=dateStr
         String selection = ScoresContract.ScoresTable.DATE_COLUMN + "=" + "'" + dateStr + "'";
         Log.d(TAG, selection);
 

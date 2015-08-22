@@ -40,7 +40,7 @@ public class ScoresContract {
             return BASE_CONTENT_URI.buildUpon().appendPath("id").build();
         }
         public static Uri buildScoreWithDate() {
-            return BASE_CONTENT_URI.buildUpon().appendPath("date").build();
+            return BASE_CONTENT_URI.buildUpon().appendPath("time").build();
         }
     }
 }

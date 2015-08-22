@@ -35,7 +35,7 @@ public class ScoresProvider extends ContentProvider {
         matcher.addURI(authority, null, MATCHES);
         matcher.addURI(authority, "league", MATCHES_WITH_LEAGUE);
         matcher.addURI(authority, "id", MATCHES_WITH_ID);
-        matcher.addURI(authority, "date", MATCHES_WITH_DATE);
+        matcher.addURI(authority, "time", MATCHES_WITH_DATE);
         return matcher;
     }
     private int matchUri(Uri uri) {

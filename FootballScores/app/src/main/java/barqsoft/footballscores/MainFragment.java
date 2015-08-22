@@ -80,7 +80,7 @@ public class MainFragment extends Fragment
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ViewHolder selected = (ViewHolder) view.getTag();
                 mAdapter.detailMatchId = selected.matchId;
-                MainActivity.selectedMatchId = (int) selected.matchId;
+                MainActivity.selectedMatchId = selected.matchId;
                 mAdapter.notifyDataSetChanged();
             }
         });

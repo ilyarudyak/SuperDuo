@@ -56,7 +56,7 @@
     <string name="burnley">Burnley FC</string>
     <string name="crystal_palace">Crystal Palace FC</string>
     <string name="hull_city">Hull City FC</string>
-    <string name="queens_park_rangers">Queen's Park FC</string>
+    <string name="queens_park_rangers">Queen\'s Park FC</string>
     <string name="newcastle_united">Newcastle United FC</string>
 
 </resources>

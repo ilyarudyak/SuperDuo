@@ -104,7 +104,7 @@ public class MiscUtils {
         }
     }
 
-    // -------------------- date and time --------------------
+    // -------------------- time and time --------------------
 
     /**
      * We define names for tabs in our ViewPager. We get:
@@ -138,9 +138,9 @@ public class MiscUtils {
     }
 
     /**
-     * We define date of fragment based on position. So
-     * if position == 2 we return current date,
-     * if position == 3 we return Tomorrow's date etc.
+     * We define time of fragment based on position. So
+     * if position == 2 we return current time,
+     * if position == 3 we return Tomorrow's time etc.
      */
     public static String getFragmentDate(int position) {
 
@@ -171,10 +171,10 @@ public class MiscUtils {
         }
     }
 
-    /** Format date like 2015-08-20. This is the format we use in DB. */
+    /** Format time like 2015-08-20. This is the format we use in DB. */
     public static String formatDate(Date date) {
 
-        // "yyyy-MM-dd" gets us date like 2015-08-20
+        // "yyyy-MM-dd" gets us time like 2015-08-20
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
         return sdf.format(date);

@@ -109,7 +109,7 @@ public class Match {
         return "Match{" +
                 "away='" + away + '\'' +
                 ", league='" + league + '\'' +
-                ", date='" + date + '\'' +
+                ", time='" + date + '\'' +
                 ", time='" + time + '\'' +
                 ", home='" + home + '\'' +
                 ", homeGoals='" + homeGoals + '\'' +
