@@ -24,15 +24,15 @@
     <string name="action_share">Share</string>
     <!-- Match day title -->
     <string name="match_day_text">Match day</string>
-    <!-- Strings for debugging TODO remove -->
+    <!-- Strings for debugging -->
     <string name="test_man_u">Manchester United FC</string>
     <string name="test_chelsea">Chelsea FC</string>
     <string name="test_score">1:0</string>
     <string name="test_time">15:00</string>
 
     <!-- Widget titles -->
-    <string name="small_widget_title">Football Scores Small</string>
-    <string name="collection_widget_title">Football Scores Collection</string>
+    <string name="small_widget_title">Football Scores (Small)</string>
+    <string name="collection_widget_title">Football Scores (Large)</string>
 
     <!-- A11y -->
     <string name="a11y_home_team_crest">Home team crest: <xliff:g id="team">%1$s</xliff:g></string>

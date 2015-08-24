@@ -10,6 +10,7 @@ import java.util.List;
 
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.api.Match;
+import barqsoft.footballscores.utils.MiscUtils;
 
 /**
  * Created by ilyarudyak on 8/24/15.
@@ -32,15 +33,31 @@ public class CollectionViewsFactory implements
     @Override
     public RemoteViews getViewAt(int position) {
 
-        RemoteViews row = new RemoteViews(mContext.getPackageName(), R.layout.small_widget);
-        setRow(row, position);
+        RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.small_widget);
+        setRemoteViews(rv, position);
 
-        return row;
+        return rv;
     }
 
     // helper methods
-    private void setRow(RemoteViews row, int position) {
-        row.setTextViewText(R.id.home_name, mMatches.get(position).getHome());
+    private void setRemoteViews(RemoteViews rv, int position) {
+
+        Match m = mMatches.get(position);
+
+        // set command titles
+        rv.setTextViewText(R.id.home_name, m.getHome());
+        rv.setTextViewText(R.id.away_name, m.getAway());
+
+        // set command logos
+        rv.setImageViewResource(R.id.home_crest, MiscUtils.getTeamCrestByTeamName(m.getHome()));
+        rv.setImageViewResource(R.id.away_crest, MiscUtils.getTeamCrestByTeamName(m.getAway()));
+
+        // set score
+        rv.setTextViewText(R.id.score_text_view, m.getHomeGoals() + ":" + m.getAwayGoals());
+
+        // set time of match
+        rv.setTextViewText(R.id.time_text_view, m.getTime());
+
     }
 
     // simple getters

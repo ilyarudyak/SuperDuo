@@ -83,8 +83,7 @@ public class SmallWidgetService extends IntentService {
 
         // set score
         mRemoteViews.setTextViewText(R.id.score_text_view,
-                mMatch.getHomeGoals() + ":" +
-                        mMatch.getAwayGoals());
+                mMatch.getHomeGoals() + ":" + mMatch.getAwayGoals());
 
         // set time of match
         mRemoteViews.setTextViewText(R.id.time_text_view, mMatch.getTime());
