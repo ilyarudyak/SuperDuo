@@ -3,11 +3,9 @@ package barqsoft.footballscores;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import android.widget.ListView;
 
 import barqsoft.footballscores.adapter.ScoresAdapter;
 import barqsoft.footballscores.adapter.ViewHolder;
-import barqsoft.footballscores.api.ScoresFetchService;
 import barqsoft.footballscores.data.ScoresContract;
 import barqsoft.footballscores.utils.MiscUtils;
 
@@ -52,7 +49,7 @@ public class MainFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDate[0] = getArguments().getString(FRAGMENT_DATE);
-        Log.d(TAG, mDate[0]);
+//        Log.d(TAG, mDate[0]);
     }
 
     @Override
@@ -64,17 +61,11 @@ public class MainFragment extends Fragment
 
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-//        updateScores();
         setAdapter();
 
         return rootView;
     }
 
-    // start service to get scores
-    private void updateScores() {
-        Intent serviceIntent = new Intent(getActivity(), ScoresFetchService.class);
-        getActivity().startService(serviceIntent);
-    }
     private void setAdapter () {
 
         mAdapter = new ScoresAdapter(getActivity(), null, 0);
@@ -87,7 +78,7 @@ public class MainFragment extends Fragment
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ViewHolder selected = (ViewHolder) view.getTag();
                 mAdapter.detailMatchId = selected.matchId;
-                MainActivity.selectedMatchId = (int) selected.matchId;
+                MainActivity.selectedMatchId = selected.matchId;
                 mAdapter.notifyDataSetChanged();
             }
         });

@@ -16,16 +16,16 @@ import barqsoft.footballscores.api.JsonParser;
  */
 public class MiscUtils {
 
-    public static String getLeague(String leagueNum) {
+    public static String getLeague(Context context, String leagueNum) {
         switch (leagueNum) {
             case JsonParser.SERIE_A:
-                return "Serie A 2015/16";
+                return context.getString(R.string.serie_a);
             case JsonParser.PREMIER_LEAGUE:
-                return "Premier League 2015/16";
+                return context.getString(R.string.premier_league);
             case JsonParser.PRIMERA_DIVISION:
-                return "Primera Division 2015/16";
+                return context.getString(R.string.primera_divison);
             case JsonParser.BUNDESLIGA:
-                return "Bundesliga 2015/16 - BL1";
+                return context.getString(R.string.bundesliga);
             default:
                 return "Not listed league";
         }
@@ -54,11 +54,11 @@ public class MiscUtils {
             return String.valueOf(home_goals) + " - " + String.valueOf(awaygoals);
         }
     }
-    public static int getTeamCrestByTeamName(String teamname) {
-        if (teamname == null) {
+    public static int getTeamCrestByTeamName(String teamName) {
+        if (teamName == null) {
             return R.drawable.no_icon;
         }
-        switch (teamname) {
+        switch (teamName) {
             case "Arsenal London FC":
                 return R.drawable.arsenal;
             case "Manchester United FC":
@@ -85,12 +85,26 @@ public class MiscUtils {
                 return R.drawable.sunderland;
             case "Stoke City FC":
                 return R.drawable.stoke_city;
+            case "Aston Villa FC" :
+                return R.drawable.aston_villa;
+            case "Burnley FC" :
+                return R.drawable.burnley_fc_hd_logo;
+            case "Crystal Palace FC" :
+                return R.drawable.crystal_palace_fc;
+            case "Hull City FC" :
+                return R.drawable.hull_city_afc_hd_logo;
+            case "Queen's Park FC" :
+                return R.drawable.queens_park_rangers_hd_logo;
+            case "Newcastle United FC" :
+                return R.drawable.newcastle_united;
+            case "Southampton FC" :
+                return R.drawable.southampton_fc;
             default:
                 return R.drawable.no_icon;
         }
     }
 
-    // -------------------- date and time --------------------
+    // -------------------- time and time --------------------
 
     /**
      * We define names for tabs in our ViewPager. We get:
@@ -119,44 +133,53 @@ public class MiscUtils {
                 date = calendar.getTime();
                 return sdf.format(date);
             default:
-                throw new IllegalArgumentException("wrong position: " + position);
+                return context.getString(R.string.today);
         }
     }
 
     /**
-     * We define date of fragment based on position. So
-     * if position == 2 we return current date,
-     * if position == 3 we return Tomorrow's date etc.
+     * We define time of fragment based on position. So
+     * if position == 2 we return current time,
+     * if position == 3 we return Tomorrow's time etc.
      */
     public static String getFragmentDate(int position) {
 
         Calendar calendar = new GregorianCalendar();
 
-        // "yyyy-MM-dd" gets us date like 2015-08-20
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-
         switch (position) {
             case 0:
                 calendar.add(Calendar.DAY_OF_MONTH, -2);
                 Date date = calendar.getTime();
-                return sdf.format(date);
+                return formatDate(date);
             case 1:
                 calendar.add(Calendar.DAY_OF_MONTH, -1);
                 date = calendar.getTime();
-                return sdf.format(date);
+                return formatDate(date);
             case 2:
                 date = calendar.getTime();
-                return sdf.format(date);
+                return formatDate(date);
             case 3:
                 calendar.add(Calendar.DAY_OF_MONTH, 1);
                 date = calendar.getTime();
-                return sdf.format(date);
+                return formatDate(date);
             case 4:
                 calendar.add(Calendar.DAY_OF_MONTH, 2);
                 date = calendar.getTime();
-                return sdf.format(date);
+                return formatDate(date);
             default:
                 throw new IllegalArgumentException("wrong position: " + position);
         }
     }
+
+    /** Format time like 2015-08-20. This is the format we use in DB. */
+    public static String formatDate(Date date) {
+
+        // "yyyy-MM-dd" gets us time like 2015-08-20
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+
+        return sdf.format(date);
+    }
+
+
+
 }

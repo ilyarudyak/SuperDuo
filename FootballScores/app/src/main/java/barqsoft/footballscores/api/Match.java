@@ -1,7 +1,9 @@
 package barqsoft.footballscores.api;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import barqsoft.footballscores.data.ScoresContract.ScoresTable;
@@ -107,7 +109,7 @@ public class Match {
         return "Match{" +
                 "away='" + away + '\'' +
                 ", league='" + league + '\'' +
-                ", date='" + date + '\'' +
+                ", time='" + date + '\'' +
                 ", time='" + time + '\'' +
                 ", home='" + home + '\'' +
                 ", homeGoals='" + homeGoals + '\'' +
@@ -140,5 +142,30 @@ public class Match {
             values[i] = buildContentValues(matches.get(i));
         }
         return values;
+    }
+
+    public static List<Match>  getMatchesFromCursor(Cursor cursor) {
+
+        List<Match> matches = new ArrayList<>();
+
+        if (cursor.moveToFirst()){
+            do {
+                Match match = new Match();
+
+                match.setLeague(cursor.getString(cursor.getColumnIndex(ScoresTable.LEAGUE_COLUMN)));
+                match.setDate(cursor.getString(cursor.getColumnIndex(ScoresTable.DATE_COLUMN)));
+                match.setTime(cursor.getString(cursor.getColumnIndex(ScoresTable.TIME_COLUMN)));
+                match.setHome(cursor.getString(cursor.getColumnIndex(ScoresTable.HOME_COLUMN)));
+                match.setAway(cursor.getString(cursor.getColumnIndex(ScoresTable.AWAY_COLUMN)));
+                match.setHomeGoals(cursor.getString(cursor.getColumnIndex(ScoresTable.HOME_GOALS_COLUMN)));
+                match.setAwayGoals(cursor.getString(cursor.getColumnIndex(ScoresTable.AWAY_GOALS_COLUMN)));
+                match.setMatchId(cursor.getString(cursor.getColumnIndex(ScoresTable.MATCH_ID_COLUMN)));
+                match.setMatchDay(cursor.getString(cursor.getColumnIndex(ScoresTable.MATCH_DAY_COLUMN)));
+
+                matches.add(match);
+            } while(cursor.moveToNext());
+        }
+
+        return matches;
     }
 }

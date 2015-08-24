@@ -1,10 +1,10 @@
 <!-- we update widget every 12 hours as our service -->
-<!-- widget has min size 4 x 1 -->
+<!-- widget has min size 4 x 2 -->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="288dp"
-    android:minHeight="72dp"
+    android:minHeight="144dp"
     android:updatePeriodMillis="43200000"
-    android:initialLayout="@layout/small_widget"
-    android:previewImage="@drawable/small_widget"
-
+    android:initialLayout="@layout/collection_widget"
+    android:previewImage="@drawable/collection_widget"
+    android:resizeMode="vertical"
 />

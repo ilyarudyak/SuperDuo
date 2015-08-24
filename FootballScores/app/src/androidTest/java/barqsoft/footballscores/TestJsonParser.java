@@ -18,14 +18,14 @@ public class TestJsonParser extends AndroidTestCase {
     public void testGetScoresJsonFromNetwork() throws Throwable {
 
         String jsonStr = TestUtils.getJsonScoreStr();
-        List<Match> matchList = JsonParser.parseScoresJsonStr(jsonStr);
+        List<Match> matchList = JsonParser.parseScoresJsonStr(jsonStr, false);
         Log.d(TAG, matchList.get(0).toString());
     }
 
     public void testGetScoresJsonFromNetworkMC() throws Throwable {
 
         String jsonStr = TestUtils.getJsonScoreStrMC();
-        List<Match> matchList = JsonParser.parseScoresJsonStr(jsonStr);
+        List<Match> matchList = JsonParser.parseScoresJsonStr(jsonStr, false);
         Match m = matchList.get(0);
 
         assertEquals("398", m.getLeague());

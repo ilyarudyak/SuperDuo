@@ -33,7 +33,7 @@ public class JsonParser {
     private static final String LINKS =                 "_links";
     private static final String SOCCER_SEASON =         "soccerseason";
     private static final String SELF =                  "self";
-    private static final String MATCH_DATE =            "date";
+    private static final String MATCH_DATE =            "time";
     private static final String HOME_TEAM =             "homeTeamName";
     private static final String AWAY_TEAM =             "awayTeamName";
     private static final String RESULT =                "result";
@@ -72,7 +72,7 @@ public class JsonParser {
                 match.setMatchId(matchId);                                      // (8) matchId
 
                 String date = mo.getString(MATCH_DATE);
-                setDateTime(match, date);                                       // (2) date (3) time
+                setDateTime(match, date);                                       // (2) time (3) time
 
 
                 match.setHome(mo.getString(HOME_TEAM));                         // (4) home
