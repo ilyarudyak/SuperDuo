@@ -133,7 +133,7 @@ public class MiscUtils {
                 date = calendar.getTime();
                 return sdf.format(date);
             default:
-                throw new IllegalArgumentException("wrong position: " + position);
+                return context.getString(R.string.today);
         }
     }
 

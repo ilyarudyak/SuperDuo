@@ -34,7 +34,7 @@
 
         <!-- broadcast receiver for a small widget -->
         <receiver
-            android:name=".widget.SmallWidgetProvider"
+            android:name=".widget.small.SmallWidgetProvider"
             android:label="@string/small_widget_title" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -46,7 +46,7 @@
         </receiver>
 
         <service
-            android:name=".widget.SmallWidgetService"
+            android:name=".widget.small.SmallWidgetService"
             android:exported="false" >
         </service>
     </application>

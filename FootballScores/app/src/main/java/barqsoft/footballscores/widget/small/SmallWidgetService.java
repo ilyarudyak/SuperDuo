@@ -1,4 +1,4 @@
-package barqsoft.footballscores.widget;
+package barqsoft.footballscores.widget.small;
 
 import android.app.IntentService;
 import android.app.PendingIntent;
@@ -47,7 +47,7 @@ public class SmallWidgetService extends IntentService {
 
             mRemoteViews = new RemoteViews(getPackageName(), R.layout.small_widget);
 
-            setmRemoteViews();
+            setRemoteViews();
             buildIntent();
 
             appWidgetManager.updateAppWidget(appWidgetId, mRemoteViews);
@@ -70,7 +70,7 @@ public class SmallWidgetService extends IntentService {
             return null;
         }
     }
-    private void setmRemoteViews() {
+    private void setRemoteViews() {
         // set command titles
         mRemoteViews.setTextViewText(R.id.home_name, mMatch.getHome());
         mRemoteViews.setTextViewText(R.id.away_name, mMatch.getAway());

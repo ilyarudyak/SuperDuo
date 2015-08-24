@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +28,12 @@ public class PagerFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_pager, container, false);
 
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+
         // we use nested fragments here with min API 17
-        viewPager.setAdapter(new ScoresPageAdapter(getChildFragmentManager()));
+        ScoresPageAdapter adapter = new ScoresPageAdapter(getChildFragmentManager());
+        viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(MainActivity.CURRENT_FRAGMENT);
+
 
         return rootView;
     }
@@ -40,6 +44,8 @@ public class PagerFragment extends Fragment {
      * screens representing a fixed, small number of pages."
      * */
     private class ScoresPageAdapter extends FragmentPagerAdapter {
+
+        public final String TAG = ScoresPageAdapter.class.getSimpleName();
 
         public ScoresPageAdapter(FragmentManager fm) {
             super(fm);
@@ -57,6 +63,7 @@ public class PagerFragment extends Fragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
+            Log.d(TAG, "I'm finally calling getPageTitle()" + MiscUtils.getDayName(getActivity(), position));
             return MiscUtils.getDayName(getActivity(), position);
         }
 

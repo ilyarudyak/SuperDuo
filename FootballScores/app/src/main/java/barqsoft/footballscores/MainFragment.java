@@ -6,7 +6,6 @@ import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +49,7 @@ public class MainFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDate[0] = getArguments().getString(FRAGMENT_DATE);
-        Log.d(TAG, mDate[0]);
+//        Log.d(TAG, mDate[0]);
     }
 
     @Override
@@ -62,7 +61,6 @@ public class MainFragment extends Fragment
 
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-//        updateScores();
         setAdapter();
 
         return rootView;

@@ -30,7 +30,7 @@ public class ScoresService extends IntentService {
     public static final String NEXT_2_DAYS = "n2";
 
     // debugging options
-    // if true we use test data instead of data from API
+    // if some test flag is true we use test data instead of data from API
     private static final boolean IS_TEST_DATA_FROM_FILE = false;
     private static final boolean IS_TEST_DATA_GENERATED = true;
     private static final boolean IS_ALL_LEAGUES = true;
@@ -41,6 +41,8 @@ public class ScoresService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+
+        Log.d(TAG, "I'm a service and I'm working...");
 
         if (IS_TEST_DATA_FROM_FILE) {
             getTestDataFromFile();
@@ -84,7 +86,7 @@ public class ScoresService extends IntentService {
     private void generateTestData() {
 
         List<Match> matchList = ApiUtils.generateTestData();
-        Log.d(TAG, matchList.get(0).toString());
+//        Log.d(TAG, matchList.get(0).toString());
         ContentValues[] values = Match.buildContentValues(matchList);
         DataUtils.insertMatches(getApplicationContext(), values);
 

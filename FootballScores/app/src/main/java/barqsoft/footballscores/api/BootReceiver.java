@@ -39,11 +39,11 @@ public class BootReceiver extends BroadcastReceiver {
 
     public static void scheduleAlarms(Context context) {
 
-        AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent(context, ScoresService.class);
         PendingIntent pi = PendingIntent.getService(context, 0, i, 0);
 
-        mgr.setRepeating(AlarmManager.ELAPSED_REALTIME,
+        am.setRepeating(AlarmManager.ELAPSED_REALTIME,
                 SystemClock.elapsedRealtime(), PERIOD, pi);
     }
 }

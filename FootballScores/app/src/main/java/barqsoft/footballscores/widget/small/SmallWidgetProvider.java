@@ -1,4 +1,4 @@
-package barqsoft.footballscores.widget;
+package barqsoft.footballscores.widget.small;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
