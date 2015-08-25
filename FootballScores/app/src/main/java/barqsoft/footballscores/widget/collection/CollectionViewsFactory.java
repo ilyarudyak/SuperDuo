@@ -3,6 +3,7 @@ package barqsoft.footballscores.widget.collection;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.api.Match;
+import barqsoft.footballscores.detail.DetailFragment;
 import barqsoft.footballscores.utils.MiscUtils;
 
 /**
@@ -35,11 +37,22 @@ public class CollectionViewsFactory implements
 
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.small_widget);
         setRemoteViews(rv, position);
+        setDetailIntent(rv, position);
 
         return rv;
     }
 
     // helper methods
+    private void setDetailIntent(RemoteViews rv, int position) {
+        Intent i = new Intent();
+        Bundle extras = new Bundle();
+
+        extras.putString(DetailFragment.MATCH_ID, mMatches.get(position).getMatchId());
+        extras.putInt(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
+        i.putExtras(extras);
+
+        rv.setOnClickFillInIntent(R.id.small_widget, i);
+    }
     private void setRemoteViews(RemoteViews rv, int position) {
 
         Match m = mMatches.get(position);

@@ -54,7 +54,7 @@ public class DetailFragment extends Fragment
         getLoaderManager().initLoader(SCORES_LOADER, null, this);
 
         mScoresView = inflater.inflate(R.layout.scores_list_item, container, false);
-        LinearLayout scoresLayout = (LinearLayout) mScoresView.findViewById(R.id.scores_linear_layout);
+        LinearLayout scoresLayout = (LinearLayout) mScoresView.findViewById(R.id.scores_top_linear_layout);
         mDetailsView = inflater.inflate(R.layout.fragment_detail, container, false);
         scoresLayout.addView(mDetailsView);
 
@@ -132,17 +132,20 @@ public class DetailFragment extends Fragment
     // this method shares match details
     private void setShareIntent() {
 
-        String sharedStr =  mMatch.getHome() + " " +
-                            mMatch.getHomeGoals() + ":" + mMatch.getAwayGoals() + " " +
-                            mMatch.getAway() + " " +
-                            ScoresAdapter.FOOTBALL_SCORES_HASH_TAG;
+        if (mMatch != null) {
+            String sharedStr = mMatch.getHome() + " " +
+                    mMatch.getHomeGoals() + ":" + mMatch.getAwayGoals() + " " +
+                    mMatch.getAway() + " " +
+                    ScoresAdapter.FOOTBALL_SCORES_HASH_TAG;
 
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, sharedStr);
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, sharedStr);
 
-        if (mShareActionProvider != null) {
-            mShareActionProvider.setShareIntent(shareIntent);
+
+            if (mShareActionProvider != null) {
+                mShareActionProvider.setShareIntent(shareIntent);
+            }
         }
     }
 

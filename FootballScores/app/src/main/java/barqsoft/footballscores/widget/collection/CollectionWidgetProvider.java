@@ -1,5 +1,6 @@
 package barqsoft.footballscores.widget.collection;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -8,14 +9,12 @@ import android.net.Uri;
 import android.widget.RemoteViews;
 
 import barqsoft.footballscores.R;
+import barqsoft.footballscores.detail.DetailActivity;
 
 /**
  * Created by ilyarudyak on 8/24/15.
  */
 public class CollectionWidgetProvider extends AppWidgetProvider {
-
-    public static final String EXTRA_MATCH = "barqsoft.footballscores.widget.collection.MATCH";
-    public static final String EXTRA_MATCHES = "barqsoft.footballscores.widget.collection.MATCHES";
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -30,6 +29,12 @@ public class CollectionWidgetProvider extends AppWidgetProvider {
             // set remote adapter; widget has only ListView with id == words
             RemoteViews widget = new RemoteViews(context.getPackageName(), R.layout.collection_widget);
             widget.setRemoteAdapter(R.id.matches_list_view, serviceIntent);
+
+            // set on click intent to show details of the match in app
+            Intent detailIntent = new Intent(context, DetailActivity.class);
+            PendingIntent pi = PendingIntent.getActivity(context, 0,
+                    detailIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            widget.setPendingIntentTemplate(R.id.matches_list_view, pi);
 
             // and here we use manager to update remote views
             appWidgetManager.updateAppWidget(appWidgetId, widget);

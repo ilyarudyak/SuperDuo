@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:elevation="4dp"
     android:background="@color/primary"
-    android:id="@+id/scores_linear_layout"
+    android:id="@+id/scores_top_linear_layout"
     >
     <ImageView
         android:id="@+id/league_image_view"
