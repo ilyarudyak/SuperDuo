@@ -30,21 +30,21 @@ public class MiscUtils {
                 return "Not listed league";
         }
     }
-    public static String getMatchDay(int match_day, String leagueNum) {
-        if (leagueNum == JsonParser.CHAMPIONS_LEAGUE) {
-            if (match_day <= 6) {
+    public static String getMatchDay(int matchDay, String leagueNum) {
+        if (leagueNum.equals(JsonParser.CHAMPIONS_LEAGUE)) {
+            if (matchDay <= 6) {
                 return "Group Stages, Matchday : 6";
-            } else if (match_day == 7 || match_day == 8) {
+            } else if (matchDay == 7 || matchDay == 8) {
                 return "First Knockout round";
-            } else if (match_day == 9 || match_day == 10) {
+            } else if (matchDay == 9 || matchDay == 10) {
                 return "QuarterFinal";
-            } else if (match_day == 11 || match_day == 12) {
+            } else if (matchDay == 11 || matchDay == 12) {
                 return "SemiFinal";
             } else {
                 return "Final";
             }
         } else {
-            return "Matchday : " + String.valueOf(match_day);
+            return "Matchday : " + String.valueOf(matchDay);
         }
     }
     public static String getScores(int home_goals, int awaygoals) {

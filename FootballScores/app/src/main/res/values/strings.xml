@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
-    <!-- App name -->
+    <!-- App name and activities titles-->
     <string name="app_name">Football Scores</string>
+    <string name="title_activity_detail">Match details</string>
 
     <!-- Menu actions in options menu in MainActivity -->
     <string name="action_refresh">Refresh</string>
     <string name="action_about">About</string>
+    <string name="action_share_match">Share</string>
 
     <!-- Title of days for PagerTabStrip of ViewPager -->
     <string name="today">Today</string>
@@ -38,6 +40,7 @@
     <string name="a11y_home_team_crest">Home team crest: <xliff:g id="team">%1$s</xliff:g></string>
     <string name="a11y_away_team_crest">Away team crest: <xliff:g id="team">%1$s</xliff:g></string>
     <string name="a11y_share_button">Share button</string>
+    <string name="a11y_premier_league_image">Premier League Image</string>
 
     <!-- Command titles -->
     <string name="arsenal">Arsenal London FC</string>
@@ -58,9 +61,7 @@
     <string name="hull_city">Hull City FC</string>
     <string name="queens_park_rangers">Queen\'s Park FC</string>
     <string name="newcastle_united">Newcastle United FC</string>
-    <string name="title_activity_detail">DetailActivity</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+
 
 </resources>
 
