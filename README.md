@@ -57,9 +57,10 @@ We use a separate linear layout that contains these buttons. We use `Minimum wid
 # FootballScores
 
 ## Widgets
-We have two widgets: 
-1. *Small* widget shows the first match Today. On click it opens `MainActivity`. We get information about this match from DB in background using `SmallWidgetService`. We use a separate layout for a widget - `small_widget.xml`, but probably we can use `scores_list_item.xml`.
-2. *Collection* widget shows all matches Today. We use here specialized classes like `RemoteViewsService` and `RemoteViewsFactory`. We use this sample [project](https://github.com/commonsguy/cw-omnibus/tree/master/AppWidget/LoremWidget). On click this widget opens `DetailActivity` that we created for this purpose. We send only `matchId` via intent and then get information from DB using `LoaderCallbacks`.
+We have two widgets:
+
+1. *Small* widget shows the first match for Today. On click it opens `MainActivity`. We get information about this match from DB in background using `SmallWidgetService`. We use a separate layout for a widget - `small_widget.xml`, but probably we can use `scores_list_item.xml`.
+2. *Collection* widget shows all matches for Today. We use here specialized classes like `RemoteViewsService` and `RemoteViewsFactory`. We use this sample [project](https://github.com/commonsguy/cw-omnibus/tree/master/AppWidget/LoremWidget). On click this widget opens `DetailActivity` that we created for this purpose. We send only `matchId` via intent and then get information from DB using `LoaderCallbacks`.
 
 ## Debugging data
 1. We can not get enough information from API call so we prepared test data. We may switch between test and API data in `ScoresService` using flags like `IS_TEST_DATA_GENERATED`. We also have flag `IS_ALL_LEAGUES` to get information from *all* leagues, not only from our restricted list. When we generate data we use `setSeed(0)` to simplify testing.
