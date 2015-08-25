@@ -52,7 +52,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:id="@+id/book_cover"
-            android:src="@raw/placeholder_detail"
             android:contentDescription="@string/book_cover"
             />
         <LinearLayout

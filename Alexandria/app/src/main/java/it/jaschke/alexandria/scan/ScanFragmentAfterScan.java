@@ -18,6 +18,7 @@ public class ScanFragmentAfterScan extends BookSearchFragment {
         mArgs = getArguments();
     }
 
+
     @Override
     public void setEanEditText() {
         super.setEanEditText();
