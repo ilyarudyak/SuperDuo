@@ -7,6 +7,7 @@ import java.util.List;
 
 import barqsoft.footballscores.api.JsonParser;
 import barqsoft.footballscores.api.Match;
+import barqsoft.footballscores.utils.MiscUtils;
 
 /**
  * Created by ilyarudyak on 8/19/15.
@@ -36,6 +37,14 @@ public class TestJsonParser extends AndroidTestCase {
         assertEquals("3", m.getHomeGoals());
         assertEquals("0", m.getAwayGoals());
         assertEquals("2", m.getMatchDay());
+    }
+
+    public void testSetDateTime() throws Throwable {
+
+        Match match = new Match();
+        String dateStr = "2015-08-16T15:00:00Z";
+        MiscUtils.setDateTime(match, dateStr);
+        Log.d(TAG, match.toString());
     }
 }
 

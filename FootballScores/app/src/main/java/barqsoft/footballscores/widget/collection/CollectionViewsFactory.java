@@ -66,7 +66,7 @@ public class CollectionViewsFactory implements
         rv.setImageViewResource(R.id.away_crest, MiscUtils.getTeamCrestByTeamName(m.getAway()));
 
         // set score
-        rv.setTextViewText(R.id.score_text_view, m.getHomeGoals() + ":" + m.getAwayGoals());
+        rv.setTextViewText(R.id.score_text_view, m.getScore());
 
         // set time of match
         rv.setTextViewText(R.id.time_text_view, m.getTime());

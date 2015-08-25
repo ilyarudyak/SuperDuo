@@ -84,7 +84,7 @@ public class DetailFragment extends Fragment
             awayName.setText(awayNameStr);
             homeCrest.setImageResource(MiscUtils.getTeamCrestByTeamName(homeNameStr));
             awayCrest.setImageResource(MiscUtils.getTeamCrestByTeamName(awayNameStr));
-            score.setText(mMatch.getHomeGoals() + ":" + mMatch.getAwayGoals());
+            score.setText(mMatch.getScore());
             time.setText(mMatch.getTime());
 
             homeCrest.setContentDescription(getActivity().getString(

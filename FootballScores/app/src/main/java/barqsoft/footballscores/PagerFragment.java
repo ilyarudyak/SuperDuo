@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +62,7 @@ public class PagerFragment extends Fragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            Log.d(TAG, "I'm finally calling getPageTitle()" + MiscUtils.getDayName(getActivity(), position));
+//            Log.d(TAG, "I'm finally calling getPageTitle()" + MiscUtils.getDayName(getActivity(), position));
             return MiscUtils.getDayName(getActivity(), position);
         }
 

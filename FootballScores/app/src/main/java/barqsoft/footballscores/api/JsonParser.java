@@ -6,11 +6,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+
+import barqsoft.footballscores.utils.MiscUtils;
 
 /**
  * Created by ilyarudyak on 8/19/15.
@@ -33,7 +36,7 @@ public class JsonParser {
     private static final String LINKS =                 "_links";
     private static final String SOCCER_SEASON =         "soccerseason";
     private static final String SELF =                  "self";
-    private static final String MATCH_DATE =            "time";
+    private static final String MATCH_DATE =            "date";
     private static final String HOME_TEAM =             "homeTeamName";
     private static final String AWAY_TEAM =             "awayTeamName";
     private static final String RESULT =                "result";
@@ -55,25 +58,27 @@ public class JsonParser {
             Match match = new Match();
             JSONObject mo = matches.getJSONObject(i);
 
-            String league = mo.getJSONObject(LINKS)
-                    .getJSONObject(SOCCER_SEASON)
-                                     .getString(HREF)
-                                     .replace(SEASON_LINK, "");
+            JSONObject _links = mo.getJSONObject(LINKS);
+                String league = _links.getJSONObject(SOCCER_SEASON)
+                        .getString(HREF).replace(SEASON_LINK, "");
 
             // if isAllLeagues is set we return matches from ALL leagues
             if (isKnownLeague(league) || isAllLeagues) {
 
                 match.setLeague(league);                                        // (1) league
 
-                String matchId = mo.getJSONObject(LINKS)
-                                          .getJSONObject(SELF)
-                                          .getString(HREF)
-                                          .replace(MATCH_LINK, "");
+                String matchId = _links.getJSONObject(SELF)
+                        .getString(HREF).replace(MATCH_LINK, "");
                 match.setMatchId(matchId);                                      // (8) matchId
 
-                String date = mo.getString(MATCH_DATE);
-                setDateTime(match, date);                                       // (2) time (3) time
 
+                String dateStr = mo.getString(MATCH_DATE);                         // (2) date (3) time
+                try {
+                    MiscUtils.setDateTime(match, dateStr);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+//                setDateTime(match, date);
 
                 match.setHome(mo.getString(HOME_TEAM));                         // (4) home
                 match.setAway(mo.getString(AWAY_TEAM));                         // (5) away
@@ -86,25 +91,26 @@ public class JsonParser {
                 matchList.add(match);
             }
         }
+        Log.d(TAG, matchList.toString());
         return matchList;
     }
 
     // helper methods
-    private static void setDateTime(Match m, String date) {
+    private static void setDateTime(Match m, String dateStr) {
 
-        String time = date.substring(date.indexOf("T") + 1, date.indexOf("Z"));
-        date = date.substring(0, date.indexOf("T"));
+        String time = dateStr.substring(dateStr.indexOf("T") + 1, dateStr.indexOf("Z"));
+        dateStr = dateStr.substring(0, dateStr.indexOf("T"));
         SimpleDateFormat match_date = new SimpleDateFormat("yyyy-MM-ddHH:mm:ss");
         match_date.setTimeZone(TimeZone.getTimeZone("UTC"));
         try {
-            Date parseddate = match_date.parse(date + time);
+            Date parseddate = match_date.parse(dateStr + time);
             SimpleDateFormat new_date = new SimpleDateFormat("yyyy-MM-dd:HH:mm");
             new_date.setTimeZone(TimeZone.getDefault());
-            date = new_date.format(parseddate);
-            time = date.substring(date.indexOf(":") + 1);
-            date = date.substring(0, date.indexOf(":"));
+            dateStr = new_date.format(parseddate);
+            time = dateStr.substring(dateStr.indexOf(":") + 1);
+            dateStr = dateStr.substring(0, dateStr.indexOf(":"));
 
-            m.setDate(date);
+            m.setDate(dateStr);
             m.setTime(time);
 
         } catch (Exception e) {

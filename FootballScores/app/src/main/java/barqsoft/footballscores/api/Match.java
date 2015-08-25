@@ -24,7 +24,6 @@ public class Match {
     private String matchDay;    // (9)
 
     public Match() {
-
     }
 
     public Match(String away, String awayGoals, String date, String home,
@@ -48,13 +47,6 @@ public class Match {
         this.away = away;
     }
 
-    public String getAwayGoals() {
-        return awayGoals;
-    }
-    public void setAwayGoals(String awayGoals) {
-        this.awayGoals = awayGoals;
-    }
-
     public String getDate() {
         return date;
     }
@@ -69,11 +61,25 @@ public class Match {
         this.home = home;
     }
 
+    // goals and score
     public String getHomeGoals() {
         return homeGoals;
     }
     public void setHomeGoals(String homeGoals) {
         this.homeGoals = homeGoals;
+    }
+    public String getAwayGoals() {
+        return awayGoals;
+    }
+    public void setAwayGoals(String awayGoals) {
+        this.awayGoals = awayGoals;
+    }
+    public String getScore() {
+        if (homeGoals.equals("-1") || awayGoals.equals("-1")) {
+            return "-";
+        } else {
+            return homeGoals + ":" + awayGoals;
+        }
     }
 
     public String getLeague() {
@@ -109,7 +115,7 @@ public class Match {
         return "Match{" +
                 "away='" + away + '\'' +
                 ", league='" + league + '\'' +
-                ", time='" + date + '\'' +
+                ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
                 ", home='" + home + '\'' +
                 ", homeGoals='" + homeGoals + '\'' +

@@ -2,6 +2,7 @@ package barqsoft.footballscores.utils;
 
 import android.content.Context;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Locale;
 
 import barqsoft.footballscores.R;
 import barqsoft.footballscores.api.JsonParser;
+import barqsoft.footballscores.api.Match;
 
 /**
  * Created by yehya khaled on 3/3/2015.
@@ -174,10 +176,32 @@ public class MiscUtils {
     /** Format time like 2015-08-20. This is the format we use in DB. */
     public static String formatDate(Date date) {
 
-        // "yyyy-MM-dd" gets us time like 2015-08-20
+        // "yyyy-MM-dd" gets us date like 2015-08-20
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
         return sdf.format(date);
+    }
+    public static String formatTime(Date date) {
+
+        // "HH:mm" gets us time like 15:00
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.US);
+
+        return sdf.format(date);
+    }
+
+    /**
+     * We parse string like 2015-08-16T15:00:00Z
+     * into date=2015-08-16 and time=15:00
+     * */
+    public static void setDateTime(Match match, String dateStr) throws ParseException {
+
+        String dateFormat = "yyyy-MM-dd'T'HH:mm:ss";
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
+        Date date = sdf.parse(dateStr);
+
+        match.setDate(formatDate(date));
+        match.setTime(formatTime(date));
+
     }
 
 

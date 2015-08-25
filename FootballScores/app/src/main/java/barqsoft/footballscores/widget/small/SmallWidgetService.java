@@ -82,8 +82,7 @@ public class SmallWidgetService extends IntentService {
                 MiscUtils.getTeamCrestByTeamName(mMatch.getAway()));
 
         // set score
-        mRemoteViews.setTextViewText(R.id.score_text_view,
-                mMatch.getHomeGoals() + ":" + mMatch.getAwayGoals());
+        mRemoteViews.setTextViewText(R.id.score_text_view, mMatch.getScore());
 
         // set time of match
         mRemoteViews.setTextViewText(R.id.time_text_view, mMatch.getTime());
