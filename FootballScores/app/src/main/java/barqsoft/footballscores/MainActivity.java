@@ -17,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
     // so today has position == 2
     public static final int CURRENT_FRAGMENT = 2;
 
+    // if this flag is set we show log messages
+    public static final boolean DEBUG = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

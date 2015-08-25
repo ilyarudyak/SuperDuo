@@ -32,7 +32,6 @@ public class ScoresContract {
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
 
-        // TODO why league is not argument?
         public static Uri buildScoreWithLeague() {
             return BASE_CONTENT_URI.buildUpon().appendPath("league").build();
         }

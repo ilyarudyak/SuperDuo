@@ -58,6 +58,9 @@
     <string name="hull_city">Hull City FC</string>
     <string name="queens_park_rangers">Queen\'s Park FC</string>
     <string name="newcastle_united">Newcastle United FC</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
 

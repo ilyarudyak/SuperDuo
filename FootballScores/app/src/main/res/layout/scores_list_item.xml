@@ -4,7 +4,14 @@
     android:layout_height="wrap_content"
     android:elevation="4dp"
     android:background="@color/primary"
+    android:id="@+id/scores_linear_layout"
     >
+    <ImageView
+        android:id="@+id/league_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        />
     <LinearLayout
         android:orientation="horizontal" android:layout_width="match_parent"
         android:layout_height="wrap_content"
