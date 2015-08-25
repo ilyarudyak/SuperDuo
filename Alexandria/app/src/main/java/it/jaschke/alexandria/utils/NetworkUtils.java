@@ -63,7 +63,7 @@ public class NetworkUtils {
             urlConnection.connect();
 
             InputStream inputStream = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             if (inputStream == null) {
                 return null;
             }
@@ -94,9 +94,12 @@ public class NetworkUtils {
             }
 
         }
+
         try {
             Book b = JsonParser.getBookFromJson(bookJsonString);
-            b.setIsbn_13(ean_13);
+            if (b != null) {
+                b.setIsbn_13(ean_13);
+            }
             return b;
         } catch (JSONException e) {
             Log.e(TAG, "Error parsing json", e);

@@ -13,13 +13,16 @@ import it.jaschke.alexandria.data.AlexandriaContract;
  */
 public class DbUtils {
 
-    public static void insertBookIntoDb(Context context, Book b) {
+    public static void insertBookIntoDb(Context context, Book b)
+            throws android.database.SQLException {
         insertBookDetailsIntoDb(context, b);
         insertAuthorsIntoDb(context, b);
         insertCategoriesIntoDb(context, b);
     }
 
-    public static void insertBookDetailsIntoDb(Context context, Book b) {
+    // helper methods
+    public static void insertBookDetailsIntoDb(Context context, Book b)
+        throws android.database.SQLException{
         ContentValues cv= new ContentValues();
         cv.put(AlexandriaContract.BookEntry._ID, b.getIsbn_13());
         cv.put(AlexandriaContract.BookEntry.TITLE, b.getTitle());
@@ -29,8 +32,8 @@ public class DbUtils {
         context.getContentResolver().insert(AlexandriaContract.BookEntry.CONTENT_URI, cv);
 
     }
-
-    public static void insertAuthorsIntoDb(Context context, Book b)  {
+    public static void insertAuthorsIntoDb(Context context, Book b)
+        throws  android.database.SQLException {
         List<String> authors = b.getAuthors();
         for (int i = 0; i < authors.size(); i++) {
             ContentValues cv= new ContentValues();
@@ -39,8 +42,8 @@ public class DbUtils {
             context.getContentResolver().insert(AlexandriaContract.AuthorEntry.CONTENT_URI, cv);
         }
     }
-
-    public static void insertCategoriesIntoDb(Context context, Book b)  {
+    public static void insertCategoriesIntoDb(Context context, Book b)
+        throws android.database.SQLException{
         List<String> categories = b.getCategories();
         for (int i = 0; i < categories.size(); i++) {
             ContentValues cv= new ContentValues();

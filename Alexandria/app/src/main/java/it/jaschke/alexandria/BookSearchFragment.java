@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,9 @@ public class BookSearchFragment extends Fragment {
     public static final String TOAST_NOT_CONNECTED = "You are not connected. " +
             "Search is not available.";
     public static final String TOAST_NOT_FOUND = "The book is not found";
-    public static final String TOAST_NOT_CORRECT_ISBN = "This ISBN is not correct. Please check.";
+    public static final String TOAST_NOT_CORRECT_ISBN = "This ISBN is not correct. Please check";
+    public static final String TOAST_INSERT_SUCCESSFULL = "This book is inserted into DB";
+    public static final String TOAST_CAN_NOT_INSERT = "Can not insert this book";
 
     private View mRootView;
     private Book mBook;
@@ -182,6 +185,7 @@ public class BookSearchFragment extends Fragment {
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                clearBookDetails();
                 new AddBookToDb().execute(mBook);
             }
         });
@@ -253,6 +257,10 @@ public class BookSearchFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Book book) {
+
+            // clear previous book view
+            clearBookDetails();
+
             mBook = book;
             if (mBook != null) {
                 fillBookDetails();
@@ -261,12 +269,27 @@ public class BookSearchFragment extends Fragment {
             }
         }
     }
-    public class AddBookToDb extends AsyncTask<Book, Void, Void> {
+    public class AddBookToDb extends AsyncTask<Book, Void, Boolean> {
 
         @Override
-        protected Void doInBackground(Book... params) {
-            DbUtils.insertBookIntoDb(getActivity(), params[0]);
-            return null;
+        protected Boolean doInBackground(Book... params) {
+            try {
+                DbUtils.insertBookIntoDb(getActivity(), params[0]);
+            } catch (android.database.SQLException e) {
+                Log.d(TAG, "Can not insert this book: ", e);
+                return false;
+            }
+
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (result) {
+                Toast.makeText(getActivity(), TOAST_INSERT_SUCCESSFULL, Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getActivity(), TOAST_CAN_NOT_INSERT, Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

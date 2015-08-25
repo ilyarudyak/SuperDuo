@@ -157,7 +157,7 @@ public class MainActivity extends ActionBarActivity
         if(findViewById(R.id.right_container) != null){
             id = R.id.right_container;
         }
-        getSupportFragmentManager().beginTransaction()
+        getFragmentManager().beginTransaction()
                 .replace(id, fragment)
                 .addToBackStack("Book Detail")
                 .commit();
@@ -174,7 +174,7 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void goBack(View view){
-        getSupportFragmentManager().popBackStack();
+        getFragmentManager().popBackStack();
     }
 
     private boolean isTablet() {
@@ -185,7 +185,7 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onBackPressed() {
-        if(getSupportFragmentManager().getBackStackEntryCount()<2){
+        if(getFragmentManager().getBackStackEntryCount()<2){
             finish();
         }
         super.onBackPressed();
