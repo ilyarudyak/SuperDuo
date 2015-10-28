@@ -14,7 +14,6 @@
         android:entryValues="@array/pref_start_values"
         android:defaultValue="0"/>
 
-    <!-- TODO add default boolean -->
     <CheckBoxPreference
         android:key="@string/pref_live_search_key"
         android:title="@string/pref_live_search_title"
