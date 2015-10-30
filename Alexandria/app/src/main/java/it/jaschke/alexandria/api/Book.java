@@ -92,7 +92,14 @@ public class Book {
                 ", categories=" + categories +
                 '}';
     }
+    /**
+     * If we don't have authors in json
+     * authors list will be empty (not null) and
+     * we get "" as a return value
+     * @return string of authors divided by comma or empty string
+     * */
     public String getAuthorsAsString() {
+
         return authors.toString().replace("[" , "").replace("]", "");
     }
     public String getCategoriesAsString() {

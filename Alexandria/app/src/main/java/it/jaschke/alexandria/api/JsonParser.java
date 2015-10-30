@@ -63,6 +63,7 @@ public class JsonParser {
         }
         book.setDescription(desc);
 
+        // if we don't have authors - authors array will stay empty
         if (bookInfo.has(AUTHORS)) {                                    // (5) authors
             List<String> authors = new ArrayList<>();
             JSONArray jsonArrayAuthors = bookInfo.getJSONArray(AUTHORS);

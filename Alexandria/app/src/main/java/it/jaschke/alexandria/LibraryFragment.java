@@ -85,6 +85,10 @@ public class LibraryFragment extends Fragment
             }
         });
 
+        if (cursor != null) {
+            cursor.close();
+        }
+
         return rootView;
     }
 

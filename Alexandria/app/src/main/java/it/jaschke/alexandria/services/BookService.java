@@ -31,6 +31,7 @@ import it.jaschke.alexandria.data.AlexandriaContract;
  */
 public class BookService extends IntentService {
 
+    private static final String TAG = BookService.class.getSimpleName();
     private final String LOG_TAG = BookService.class.getSimpleName();
 
     public static final String FETCH_BOOK = "it.jaschke.alexandria.services.action.FETCH_BOOK";
@@ -93,12 +94,14 @@ public class BookService extends IntentService {
                 null  // sort order
         );
 
-        if(bookEntry.getCount()>0){
-            bookEntry.close();
-            return;
+        if (bookEntry != null) {
+            if (bookEntry.getCount() > 0) {
+                bookEntry.close();
+                return;
+            } else {
+                bookEntry.close();
+            }
         }
-
-        bookEntry.close();
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -198,10 +201,14 @@ public class BookService extends IntentService {
 
             writeBackBook(ean, title, subtitle, desc, imgUrl);
 
-            if(bookInfo.has(AUTHORS)) {
+            if (bookInfo.has(AUTHORS)) {
+                Log.d(TAG, "we have authors");
                 writeBackAuthors(ean, bookInfo.getJSONArray(AUTHORS));
+            } else {
+                Log.d(TAG, "we DON'T have authors");
             }
-            if(bookInfo.has(CATEGORIES)){
+
+            if (bookInfo.has(CATEGORIES)){
                 writeBackCategories(ean,bookInfo.getJSONArray(CATEGORIES) );
             }
 
