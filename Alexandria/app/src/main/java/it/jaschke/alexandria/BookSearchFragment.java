@@ -32,8 +32,8 @@ public class BookSearchFragment extends Fragment {
             "Search is not available.";
     public static final String TOAST_NOT_FOUND = "The book is not found";
     public static final String TOAST_NOT_CORRECT_ISBN = "This ISBN is not correct. Please check";
-    public static final String TOAST_INSERT_SUCCESSFULL = "This book is inserted into DB";
-    public static final String TOAST_CAN_NOT_INSERT = "Can not insert this book";
+    public static final String TOAST_INSERT_SUCCESSFUL = "This book is stored in local database";
+    public static final String TOAST_CAN_NOT_INSERT = "Can not store this book in local database";
 
     private View mRootView;
     private Book mBook;
@@ -286,7 +286,7 @@ public class BookSearchFragment extends Fragment {
         @Override
         protected void onPostExecute(Boolean result) {
             if (result) {
-                Toast.makeText(getActivity(), TOAST_INSERT_SUCCESSFULL, Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), TOAST_INSERT_SUCCESSFUL, Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getActivity(), TOAST_CAN_NOT_INSERT, Toast.LENGTH_LONG).show();
             }
